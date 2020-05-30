@@ -4,7 +4,8 @@ Use `gif2h.py` to convert image files to C header files playable by the Arduino 
 
 # Acknowledgements
 
-This wouldn't be possible without the excellent heatshrink library:  https://github.com/atomicobject/heatshrink
+
+This wouldn't be possible without the excellent heatshrink library:  https://github.com/atomicobject/heatshrink and the equally excellent FastLED: http://fastled.io/
 
 # Discussion and terrible example video
 
