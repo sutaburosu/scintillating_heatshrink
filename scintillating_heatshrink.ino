@@ -12,41 +12,20 @@
 #define CHIPSET        WS2812B
 #define kMatrixWidth   16
 #define kMatrixHeight  16
-#define kMatrixSerpentineLayout true
+#define XY_MATRIX      (SERPENTINE | ROWMAJOR /*| FLIPMINOR*/)
 #define NUM_LEDS (kMatrixWidth * kMatrixHeight)
 
 #define SERIAL_UI      1    // if 1, can be controlled via keypresses in PuTTY
 #define FADEIN_FRAMES  32   // how long to reach full brightness when powered on
 #define MS_GOAL        20   // to try maintain 1000 / 20ms == 50 frames per second
 
-#define GIF2H_MAX_PALETTE_ENTRIES 51  // RAM is always tight on ATmega328...
+#define GIF2H_MAX_PALETTE_ENTRIES 140 // RAM is always tight on ATmega328...
 #define GIF2H_NUM_PIXELS NUM_LEDS     // all images must be the same size as the matrix
 #include "gif2h.h"
 #include "hsprites.h"
 
 CRGB leds[NUM_LEDS];
 CRGBPalette16 currentPalette;
-
-uint16_t XY(uint8_t x, uint8_t y) {
-  uint16_t i;
-  if (kMatrixSerpentineLayout == false) {
-    i = (y * kMatrixWidth) + x;
-  }
-  if (kMatrixSerpentineLayout == true) {
-    if (y & 0x01) {
-      // Odd rows run backwards
-      uint8_t reverseX = (kMatrixWidth - 1) - x;
-      i = (y * kMatrixWidth) + reverseX;
-    } else {
-      // Even rows run forwards
-      i = (y * kMatrixWidth) + x;
-    }
-  }
-  return i;
-}
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
 
 typedef struct {
   uint8_t xw, yw, xd, yd;
@@ -76,7 +55,7 @@ void setup() {
   if (MAX_MILLIWATTS > 0) FastLED.setMaxPowerInMilliWatts(MAX_MILLIWATTS);
 
   if (SERIAL_UI == 1) {
-    Serial.begin(2000000);
+    Serial.begin(250000);
     halp();
   }
 
@@ -300,9 +279,7 @@ void inc_rs_preset(uint8_t n) {
   cfg.rs_preset_n = addmod8(cfg.rs_preset_n, n, MAX_RS_PRESETS);
   uint8_t* src = (uint8_t *) &rs_presets[cfg.rs_preset_n];
   uint8_t* dst = (uint8_t *) &cfg.rs;
-  for (byte i = 0; i < sizeof(cfg.rs); i++) {
-    dst[i] = FL_PGM_READ_BYTE_NEAR(src++);
-  }
+  memcpy_P(dst, src, sizeof(cfg.rs));
 }
 
 void rainbow_smoothie() {
@@ -345,29 +322,32 @@ void randomise_rainbowsmoothie() {
 
 // An HStatus is large. How large depends on your compression settings, max 
 // palette entries and NUM_LEDS. e.g. 49 colours with -w8 -l7 buffer16 is 698 bytes
-HStatus hspr_status[1];
+HStatus hstatus;
 
 void scintillating_heatshrink() {
   static uint8_t spr_n = 0;
   static uint32_t last_spr_change = 0;
-  HStatus * status = &hspr_status[0];
-  if ((status->loops > 0) && (cfg.millis - last_spr_change > 2500)) {
+  if ((hstatus.loops > 0) && (cfg.millis - last_spr_change > 2500)) {
     last_spr_change = cfg.millis;
     spr_n = addmod8(spr_n, 1, HSPRITES_N);
   }
-  heatshrunk_sprite_prepare(status, spr_n);
-  heatshrunk_sprite_plot(0 /*- (cos8(cfg.frame & 0x7f) >> 3)*/, 0, (uint8_t *) &status->palette, cfg.alpha_fade);
+  heatshrunk_sprite_prepare(&hstatus, spr_n);
+  heatshrunk_sprite_plot(0 /*- (cos8(cfg.frame & 0x7f) >> 3)*/, 0, &hstatus, cfg.alpha_fade);
 }
 
 void heatshrunk_sprite_reset(HStatus *status, uint8_t hs_spr_n) {
-  heatshrink_decoder_reset(&status->hsd);
+  // decompress the palette and leave the decompressor ready to emit pixels
   status->hs_spr_n = hs_spr_n;
   status->heatsunk = 0;
   status->frame = 0;
-  // decompress the palette and leave the decompressor ready to emit pixels
   HSprite *spr_ptr = (HSprite *) FL_PGM_READ_PTR_NEAR(&hsprite_list[hs_spr_n]);
   // uint16_t datasize = FL_PGM_READ_WORD_NEAR(&spr_ptr->datasize);
   uint8_t palette_entries = FL_PGM_READ_BYTE_NEAR(&spr_ptr->palette_entries);
+
+  // set heatshrink's window buffer position, so the pixels end up aligned with the start of the buffer
+  heatshrink_decoder_reset(&status->hsd);
+  status->hsd.head_index -= palette_entries * sizeof(CRGB);
+
   uint8_t *dst = (uint8_t *) &status->palette;
   uint16_t remaining = palette_entries * sizeof(CRGB);
   size_t count = 0;
@@ -411,7 +391,6 @@ void heatshrunk_sprite_prepare(HStatus * status, uint8_t hs_spr_n) {
   status->frame++;
   status->last_millis = cfg.millis;
   size_t count = 0;
-  uint8_t *dst = &status->pixels[0];
   uint16_t remaining = GIF2H_NUM_PIXELS;
   while (remaining) {
     if (status->heatsunk < datasize) {
@@ -421,8 +400,7 @@ void heatshrunk_sprite_prepare(HStatus * status, uint8_t hs_spr_n) {
     }
     HSD_poll_res pres;
     do {
-      pres = heatshrink_decoder_poll(&status->hsd, dst, remaining, &count);
-      dst += count;
+      pres = heatshrink_decoder_poll(&status->hsd, 0, remaining, &count);
       remaining -= count;
     } while ((pres == HSDR_POLL_MORE) && remaining);
     if (0 && (status->heatsunk >= datasize)) {
@@ -431,16 +409,16 @@ void heatshrunk_sprite_prepare(HStatus * status, uint8_t hs_spr_n) {
   }
 }
 
-void heatshrunk_sprite_plot(int8_t xstart, int8_t ystart, const uint8_t *sprite, const uint8_t fade_speed) {
-  CRGB *pal = (CRGB *) sprite;
-  sprite += GIF2H_MAX_PALETTE_ENTRIES * sizeof(CRGB);
+void heatshrunk_sprite_plot(int8_t xstart, int8_t ystart, HStatus* status, const uint8_t fade_speed) {
+  CRGB *pal = (CRGB *) status->palette;
+  uint8_t *pixels = status->hsd.buffers + HEATSHRINK_STATIC_INPUT_BUFFER_SIZE;
   // plot each sprite pixel modulo the size of the matrix, i.e. wrap the image
   for (uint8_t y = 0; y < kMatrixHeight; y++) {
     for (uint8_t x = 0; x < kMatrixWidth; x++) {
       uint16_t led_index = XY(addmod8(x, xstart, kMatrixWidth),
                               (kMatrixHeight - 1) - addmod8(y, ystart, kMatrixHeight));
-      uint8_t palette_index = *sprite++;
-      if (palette_index > 0) {
+      uint8_t palette_index = *pixels++;
+      if (palette_index > 0 && cfg.effect != 1) {
         // non-0 palette entry;  copy the palette entry to the LED
         leds[led_index] = pal[palette_index];
       } else {

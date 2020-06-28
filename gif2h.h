@@ -14,13 +14,13 @@
 #endif
 
 typedef struct HSprite {
-    uint16_t datasize;
-    uint16_t frames;
-    uint16_t duration;
-    uint8_t flags;
-    uint8_t palette_entries;
-    CRGB palette[];
-    uint8_t hs_data[];
+  uint16_t datasize;
+  uint16_t frames;
+  uint16_t duration;
+  uint8_t flags;
+  uint8_t palette_entries;
+  CRGB palette[];
+  uint8_t hs_data[];
 } HSprite;
 
 typedef struct HStatus {
@@ -31,7 +31,7 @@ typedef struct HStatus {
   uint8_t hs_spr_n = -1;
   uint8_t loops;
   CRGB palette[GIF2H_MAX_PALETTE_ENTRIES];
-  uint8_t pixels[GIF2H_NUM_PIXELS];
+  // uint8_t pixels[GIF2H_NUM_PIXELS];
 } HStatus;
 
 #endif

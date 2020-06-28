@@ -178,7 +178,7 @@ static HSD_state st_yield_backref(heatshrink_decoder *hsd,
 
 HSD_poll_res heatshrink_decoder_poll(heatshrink_decoder *hsd,
         uint8_t *out_buf, size_t out_buf_size, size_t *output_size) {
-    if ((hsd == NULL) || (out_buf == NULL) || (output_size == NULL)) {
+    if ((hsd == NULL) || /*(out_buf == NULL) ||*/ (output_size == NULL)) {
         return HSDR_POLL_ERROR_NULL;
     }
     *output_size = 0;
@@ -406,6 +406,8 @@ HSD_finish_res heatshrink_decoder_finish(heatshrink_decoder *hsd) {
 
 static void push_byte(heatshrink_decoder *hsd, output_info *oi, uint8_t byte) {
     LOG(" -- pushing byte: 0x%02x ('%c')\n", byte, isprint(byte) ? byte : '.');
-    oi->buf[(*oi->output_size)++] = byte;
+    if (oi->buf)
+        oi->buf[*oi->output_size] = byte;
+    *oi->output_size += 1;
     (void)hsd;
 }

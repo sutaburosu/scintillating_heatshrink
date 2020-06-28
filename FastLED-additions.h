@@ -9,6 +9,14 @@
 #define memcpy_P(dest, src, n) memcpy(dest, src, n)
 #endif
 
+enum XY_matrix_config {
+  SERPENTINE = 1,
+  ROWMAJOR = 2,
+  FLIPMAJOR = 4,
+  FLIPMINOR = 8
+};
+
+uint16_t XY(uint8_t x, uint8_t y);
 CRGB fadeTowardColour(CRGB& cur, const CRGB& target, uint8_t amount);
 CRGB fadeTowardColour_video(CRGB& cur, const CRGB& target, uint8_t amount);
 void nblendU8TowardU8(uint8_t& cur, const uint8_t target, uint8_t amount);
