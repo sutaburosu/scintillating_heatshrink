@@ -321,7 +321,7 @@ class SpriteViewer(QMainWindow):
         self.current_sprite_idx = 0
         self.current_frame = 0
         self.playing = True  # Auto-play by default
-        self.magnification = 10
+        self.magnification = 24
         self.fps = 10
         self.transform_mode = Qt.TransformationMode.FastTransformation  # Matches default combo selection
         self.timer = QTimer(self)
@@ -486,11 +486,32 @@ class SpriteViewer(QMainWindow):
         self.status_bar = self.statusBar()
         self.status_bar.showMessage('Ready')
 
-        # Global keyboard shortcuts for sprite navigation
+        # Global keyboard shortcuts
+        self.play_pause_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Space), self)
+        self.play_pause_shortcut.activated.connect(self.toggle_play)
+        
         self.prev_sprite_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Left), self)
         self.prev_sprite_shortcut.activated.connect(self.prev_sprite)
         self.next_sprite_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Right), self)
         self.next_sprite_shortcut.activated.connect(self.next_sprite)
+        
+        self.prev_frame_shortcut = QShortcut(QKeySequence(Qt.Key.Key_PageUp), self)
+        self.prev_frame_shortcut.activated.connect(self.prev_frame)
+        self.next_frame_shortcut = QShortcut(QKeySequence(Qt.Key.Key_PageDown), self)
+        self.next_frame_shortcut.activated.connect(self.next_frame)
+        
+        self.zoom_in_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Plus), self)
+        self.zoom_in_shortcut.activated.connect(self._zoom_in)
+        self.zoom_in_shortcut2 = QShortcut(QKeySequence(Qt.Key.Key_Equal), self)
+        self.zoom_in_shortcut2.activated.connect(self._zoom_in)
+        
+        self.zoom_out_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Minus), self)
+        self.zoom_out_shortcut.activated.connect(self._zoom_out)
+        
+        for i in range(1, 10):
+            key = Qt.Key.Key_1 + (i - 1)
+            shortcut = QShortcut(QKeySequence(key), self)
+            shortcut.activated.connect(lambda idx=i-1: self.sprite_combo.setCurrentIndex(idx))
 
     def load_sprite(self, idx):
         """Load a sprite and its source GIF."""
@@ -669,6 +690,14 @@ class SpriteViewer(QMainWindow):
         if self.sprites:
             self.show_current_frame()
 
+    def _zoom_in(self):
+        """Zoom in by 1."""
+        self.mag_slider.setValue(min(30, self.magnification + 1))
+
+    def _zoom_out(self):
+        """Zoom out by 1."""
+        self.mag_slider.setValue(max(2, self.magnification - 1))
+
     def scale_changed(self, mode_name):
         """Handle scaling mode change."""
         self.transform_mode = TRANSFORM_MODES[mode_name]
@@ -680,24 +709,11 @@ class SpriteViewer(QMainWindow):
         """Handle keyboard shortcuts."""
         modifiers = event.modifiers()
         
-        if event.key() == Qt.Key.Key_Space:
-            self.toggle_play()
-        elif event.key() == Qt.Key.Key_Left and modifiers & Qt.KeyboardModifier.ControlModifier:
+        # Ctrl+Left/Right for frame navigation (QShortcut doesn't handle modifiers cleanly)
+        if event.key() == Qt.Key.Key_Left and modifiers & Qt.KeyboardModifier.ControlModifier:
             self.prev_frame()
         elif event.key() == Qt.Key.Key_Right and modifiers & Qt.KeyboardModifier.ControlModifier:
             self.next_frame()
-        elif event.key() == Qt.Key.Key_PageUp:
-            self.prev_frame()
-        elif event.key() == Qt.Key.Key_PageDown:
-            self.next_frame()
-        elif event.key() == Qt.Key.Key_Plus or event.key() == Qt.Key.Key_Equal:
-            self.mag_slider.setValue(min(30, self.magnification + 1))
-        elif event.key() == Qt.Key.Key_Minus:
-            self.mag_slider.setValue(max(2, self.magnification - 1))
-        elif Qt.Key.Key_1 <= event.key() <= Qt.Key.Key_9:
-            idx = event.key() - Qt.Key.Key_1
-            if idx < len(self.sprites):
-                self.sprite_combo.setCurrentIndex(idx)
         else:
             super().keyPressEvent(event)
 
