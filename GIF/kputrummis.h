@@ -1,6 +1,6 @@
 // "kputrummis" (GIF orig:462 raw_payload:599 shrunk_payload:388 total:396 bytes)
 // Compared to GIF: 85.71% 	Compared to raw: 66.11%
-// using GIF index 0 as our transparency index 0 (blackened)
+// using GIF index 0 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; loop = 0; transparency = 0; )
 
 FL_PROGMEM const struct HSpr_kputrummis {

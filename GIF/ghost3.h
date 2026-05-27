@@ -1,6 +1,6 @@
 // "ghost3" (GIF orig:620 raw_payload:530 shrunk_payload:177 total:185 bytes)
 // Compared to GIF: 29.84% 	Compared to raw: 34.91%
-// using GIF index 1 as our transparency index 0 (blackened)
+// using GIF index 1 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 1; loop = 0; transparency = 1; )
 
 FL_PROGMEM const struct HSpr_ghost3 {
