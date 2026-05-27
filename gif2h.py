@@ -24,7 +24,6 @@ from heatshrink_encoder import compress
 parser = argparse.ArgumentParser(description='Converts GIFs to a custom format for playback on microcontrollers')
 parser.add_argument('-w', '--window', type=int, default=8, help='heatshrink window size (5 to 11)')
 parser.add_argument('-l', '--lookahead', type=int, default=7, help='heatshrink lookahead size (3 to 1 less than --window)')
-parser.add_argument('--blacken', action='store_true', help='force the declared background/transparency palette entry to black')
 # TODO parser.add_argument('--benchmark', action='store_true', help='try all compression setting combos')
 parser.add_argument('input_file', type=str, help='filename of the GIF to convert')
 parser.add_argument('output_file', type=str, nargs='?', help='filename of the GIF to convert')
@@ -63,15 +62,12 @@ if 'background' in gif.info:
     b = gif.info['background']
 if 'transparency' in gif.info:
     b = gif.info['transparency']
-    gif.compression_log += ['// using GIF index %d as our transparency index 0%s\n'
-        % (b, ' (blackened)' if args.blacken else '')]
+    gif.compression_log += ['// using GIF index %d as our transparency index 0\n'
+        % (b)]
 gif.palette_fwd_map[b] = gif.palette_i
 gif.palette_bwd_map[gif.palette_i] = b
 gif.palette_i += 1
-if not args.blacken:
-    gif.final_palette = bytearray(gif.global_palette.palette[b*3:(b+1)*3])
-else:
-    gif.final_palette = bytearray([0, 0, 0])
+gif.final_palette = bytearray(gif.global_palette.palette[b*3:(b+1)*3])
 
 # find the palette indices actually used by the images and relocate them to
 # the lowest indices. Coalesce any duped RGB triplets. Aggregate all frames'
