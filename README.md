@@ -83,7 +83,7 @@ I used local AI exclusively: [llama.cpp](https://github.com/ggerganov/llama.cpp)
 ./llama-server -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:Q8_K_XL --fit on -c 262144 --flash-attn on --swa-full -np 1 --spec-type draft-mtp --spec-draft-n-max 2 --chat-template-kwargs '{preserve_thinking:true}'  --temp 0.6 --top-p 0.95 --top-k 20 --presence-penalty 0.0 --min-p 0.0 --no-mmproj
 ```
 
-No cloud compute was used. Everything ran locally on my desktop computer: a Ryzen 9 7950X with 64GiB RAM, plus an Radeon RX 7800XT (16GiB VRAM). There was a 16GiB swapfile which was barely used. The mean increase in power consumption over my baseline desktop usage was ~100W. Depending on how much of the 262,144-token context window was active, it encoded at ~180-0 tokens per second, and decoded at ~40-20 tokens per second. Over 1-million tokens were processed in porting the heatshrink C library to Python alone.
+No cloud compute was used. Everything ran locally on my desktop computer: a Ryzen 9 7950X with 64GiB RAM, plus an Radeon RX 7800XT (16GiB VRAM). There was a 16GiB swapfile which was barely used. The mean increase in power consumption over my baseline desktop usage was ~100W. Depending on how much of the 262,144-token context window was active, it encoded at ~180-90 tokens per second, and decoded at ~40-20 tokens per second. Over 1-million tokens were processed in porting the heatshrink C library to Python alone.
 
 ## Acknowledgements
 
