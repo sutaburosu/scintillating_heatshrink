@@ -1,5 +1,5 @@
-// "lemming" (GIF orig:169 raw_payload:283 shrunk_payload:159 total:167 bytes)
-// Compared to GIF: 98.82% 	Compared to raw: 59.01%
+// "lemming" (GIF orig:169 raw_payload:256 shrunk_payload:159 total:167 bytes)
+// Compared to GIF: 98.82% 	Compared to raw: 65.23%
 // using GIF index 9 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; transparency = 9; )
 
@@ -10,15 +10,15 @@ FL_PROGMEM const struct HSpr_lemming {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 9;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 9
-		// 0x33, 0x33, 0x33,  // original palette index 8
-		// 0x55, 0xcc, 0x33,  // original palette index 5
-		// 0x11, 0x99, 0x00,  // original palette index 4
-		// 0xcc, 0x88, 0x88,  // original palette index 7
-		// 0xff, 0xff, 0xff,  // original palette index 1
-		// 0xee, 0xaa, 0x99,  // original palette index 6
-		// 0x00, 0x44, 0x99,  // original palette index 2
-		// 0x00, 0x66, 0xdd,  // original palette index 3
+		// 0xff, 0xff, 0xff,   // original palette index 9
+		// 0x33, 0x33, 0x33,   // original palette index 8
+		// 0x55, 0xcc, 0x33,   // original palette index 5
+		// 0x11, 0x99, 0x00,   // original palette index 4
+		// 0xcc, 0x88, 0x88,   // original palette index 7
+		// 0xff, 0xff, 0xff,   // original palette index 1
+		// 0xee, 0xaa, 0x99,   // original palette index 6
+		// 0x00, 0x44, 0x99,   // original palette index 2
+		// 0x00, 0x66, 0xdd,   // original palette index 3
 	};
 	uint8_t hs_data[159] = {
 		0xff, 0xff, 0xff, 0xf3, 0x39, 0x9c, 0xce, 0xab, 0xcc, 0x99, 0xc4, 0x73, 0x30, 0x0e, 0x66, 0x23, 

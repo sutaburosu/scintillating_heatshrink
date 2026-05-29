@@ -1,5 +1,5 @@
-// "slime" (GIF orig:6753 raw_payload:1039 shrunk_payload:214 total:222 bytes)
-// Compared to GIF: 3.29% 	Compared to raw: 21.37%
+// "slime" (GIF orig:6753 raw_payload:1024 shrunk_payload:214 total:222 bytes)
+// Compared to GIF: 3.29% 	Compared to raw: 21.68%
 // using GIF index 0 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; loop = 0; )
 
@@ -10,11 +10,11 @@ FL_PROGMEM const struct HSpr_slime {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 5;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0x00,  // original palette index 0
-		// 0x0e, 0x5e, 0x20,  // original palette index 1
-		// 0x32, 0xa9, 0x2a,  // original palette index 2
-		// 0x82, 0xd3, 0x4f,  // original palette index 3
-		// 0xbd, 0xed, 0x89,  // original palette index 4
+		// 0xff, 0xff, 0x00,   // original palette index 0
+		// 0x0e, 0x5e, 0x20,   // original palette index 1
+		// 0x32, 0xa9, 0x2a,   // original palette index 2
+		// 0x82, 0xd3, 0x4f,   // original palette index 3
+		// 0xbd, 0xed, 0x89,   // original palette index 4
 	};
 	uint8_t hs_data[214] = {
 		0xff, 0xff, 0xe0, 0x10, 0xea, 0xf4, 0x82, 0x65, 0xa9, 0x95, 0x60, 0xba, 0x74, 0xfd, 0xef, 0xb7, 

@@ -1,5 +1,5 @@
-// "bub" (GIF orig:309 raw_payload:1045 shrunk_payload:232 total:240 bytes)
-// Compared to GIF: 77.67% 	Compared to raw: 22.97%
+// "bub" (GIF orig:309 raw_payload:1024 shrunk_payload:232 total:240 bytes)
+// Compared to GIF: 77.67% 	Compared to raw: 23.44%
 // using GIF index 6 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 6; loop = 0; transparency = 6; )
 
@@ -10,13 +10,13 @@ FL_PROGMEM const struct HSpr_bub {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 7;
 	uint8_t crgb[0] = {
-		// 0x50, 0x77, 0x90,  // original palette index 6
-		// 0x50, 0x77, 0x90,  // original palette index 7
-		// 0xff, 0xff, 0x00,  // original palette index 4
-		// 0x00, 0xff, 0x00,  // original palette index 1
-		// 0xff, 0xff, 0xff,  // original palette index 5
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0xff, 0x73, 0x73,  // original palette index 3
+		// 0x50, 0x77, 0x90,   // original palette index 6
+		// 0x50, 0x77, 0x90,   // original palette index 7
+		// 0xff, 0xff, 0x00,   // original palette index 4
+		// 0x00, 0xff, 0x00,   // original palette index 1
+		// 0xff, 0xff, 0xff,   // original palette index 5
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0xff, 0x73, 0x73,   // original palette index 3
 	};
 	uint8_t hs_data[232] = {
 		0xa8, 0x5d, 0xf2, 0x00, 0x20, 0x5f, 0xff, 0xfc, 0x02, 0x01, 0xff, 0x80, 0x7f, 0xc0, 0xc0, 0xe0, 

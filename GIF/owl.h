@@ -1,5 +1,5 @@
-// "owl" (GIF orig:1596 raw_payload:5135 shrunk_payload:300 total:308 bytes)
-// Compared to GIF: 19.30% 	Compared to raw: 6.00%
+// "owl" (GIF orig:1596 raw_payload:5120 shrunk_payload:300 total:308 bytes)
+// Compared to GIF: 19.30% 	Compared to raw: 6.02%
 // using GIF index 4 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 3; loop = 0; transparency = 4; )
 
@@ -10,11 +10,11 @@ FL_PROGMEM const struct HSpr_owl {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 5;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 4
-		// 0x9f, 0x48, 0x00,  // original palette index 1
-		// 0xff, 0xff, 0xff,  // original palette index 3
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0xff, 0xf6, 0x00,  // original palette index 2
+		// 0xff, 0xff, 0xff,   // original palette index 4
+		// 0x9f, 0x48, 0x00,   // original palette index 1
+		// 0xff, 0xff, 0xff,   // original palette index 3
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0xff, 0xf6, 0x00,   // original palette index 2
 	};
 	uint8_t hs_data[300] = {
 		0xff, 0xff, 0xff, 0xf9, 0xfa, 0x40, 0x14, 0x18, 0x2c, 0x1f, 0xda, 0x01, 0x01, 0x80, 0x40, 0x20, 

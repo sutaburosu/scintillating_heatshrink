@@ -1,5 +1,5 @@
-// "gear" (GIF orig:914 raw_payload:2102 shrunk_payload:723 total:731 bytes)
-// Compared to GIF: 79.98% 	Compared to raw: 34.78%
+// "gear" (GIF orig:914 raw_payload:2048 shrunk_payload:723 total:731 bytes)
+// Compared to GIF: 79.98% 	Compared to raw: 35.69%
 // using GIF index 17 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 16; loop = 0; transparency = 17; )
 
@@ -10,24 +10,24 @@ FL_PROGMEM const struct HSpr_gear {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 18;
 	uint8_t crgb[0] = {
-		// 0x00, 0x00, 0xff,  // original palette index 17
-		// 0xff, 0xff, 0xff,  // original palette index 16
-		// 0xef, 0xef, 0xef,  // original palette index 15
-		// 0x8f, 0x8f, 0x8f,  // original palette index 9
-		// 0xaf, 0xaf, 0xaf,  // original palette index 11
-		// 0x70, 0x70, 0x70,  // original palette index 7
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0xdf, 0xdf, 0xdf,  // original palette index 14
-		// 0xbf, 0xbf, 0xbf,  // original palette index 12
-		// 0x40, 0x40, 0x40,  // original palette index 4
-		// 0x60, 0x60, 0x60,  // original palette index 6
-		// 0x9f, 0x9f, 0x9f,  // original palette index 10
-		// 0x50, 0x50, 0x50,  // original palette index 5
-		// 0x20, 0x20, 0x20,  // original palette index 2
-		// 0xcf, 0xcf, 0xcf,  // original palette index 13
-		// 0x10, 0x10, 0x10,  // original palette index 1
-		// 0x80, 0x80, 0x80,  // original palette index 8
-		// 0x30, 0x30, 0x30,  // original palette index 3
+		// 0x00, 0x00, 0xff,   // original palette index 17
+		// 0xff, 0xff, 0xff,   // original palette index 16
+		// 0xef, 0xef, 0xef,   // original palette index 15
+		// 0x8f, 0x8f, 0x8f,   // original palette index 9
+		// 0xaf, 0xaf, 0xaf,   // original palette index 11
+		// 0x70, 0x70, 0x70,   // original palette index 7
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0xdf, 0xdf, 0xdf,   // original palette index 14
+		// 0xbf, 0xbf, 0xbf,   // original palette index 12
+		// 0x40, 0x40, 0x40,   // original palette index 4
+		// 0x60, 0x60, 0x60,   // original palette index 6
+		// 0x9f, 0x9f, 0x9f,   // original palette index 10
+		// 0x50, 0x50, 0x50,   // original palette index 5
+		// 0x20, 0x20, 0x20,   // original palette index 2
+		// 0xcf, 0xcf, 0xcf,   // original palette index 13
+		// 0x10, 0x10, 0x10,   // original palette index 1
+		// 0x80, 0x80, 0x80,   // original palette index 8
+		// 0x30, 0x30, 0x30,   // original palette index 3
 	};
 	uint8_t hs_data[723] = {
 		0x80, 0x40, 0x3f, 0xe0, 0x00, 0x5e, 0xff, 0x7f, 0xbf, 0x1f, 0x8f, 0xc7, 0xeb, 0xf5, 0xfa, 0xfb, 

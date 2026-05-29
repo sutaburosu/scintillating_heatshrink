@@ -1,5 +1,5 @@
-// "ganja16x16" (GIF orig:200 raw_payload:292 shrunk_payload:230 total:238 bytes)
-// Compared to GIF: 119.00% 	Compared to raw: 81.51%
+// "ganja16x16" (GIF orig:200 raw_payload:256 shrunk_payload:230 total:238 bytes)
+// Compared to GIF: 119.00% 	Compared to raw: 92.97%
 // using GIF index 11 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; transparency = 11; )
 
@@ -10,18 +10,18 @@ FL_PROGMEM const struct HSpr_ganja16x16 {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 12;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 11
-		// 0x00, 0x00, 0x00,  // original palette index 10
-		// 0x46, 0xab, 0x16,  // original palette index 4
-		// 0x51, 0xcd, 0x1a,  // original palette index 2
-		// 0x03, 0x07, 0x01,  // original palette index 8
-		// 0x54, 0xf4, 0x18,  // original palette index 0
-		// 0x0a, 0x18, 0x04,  // original palette index 3
-		// 0x19, 0x3d, 0x08,  // original palette index 6
-		// 0x11, 0x26, 0x05,  // original palette index 9
-		// 0x66, 0xfc, 0x21,  // original palette index 5
-		// 0x25, 0x5a, 0x0c,  // original palette index 7
-		// 0x36, 0x8a, 0x10,  // original palette index 1
+		// 0xff, 0xff, 0xff,   // original palette index 11
+		// 0x00, 0x00, 0x00,   // original palette index 10
+		// 0x46, 0xab, 0x16,   // original palette index 4
+		// 0x51, 0xcd, 0x1a,   // original palette index 2
+		// 0x03, 0x07, 0x01,   // original palette index 8
+		// 0x54, 0xf4, 0x18,   // original palette index 0
+		// 0x0a, 0x18, 0x04,   // original palette index 3
+		// 0x19, 0x3d, 0x08,   // original palette index 6
+		// 0x11, 0x26, 0x05,   // original palette index 9
+		// 0x66, 0xfc, 0x21,   // original palette index 5
+		// 0x25, 0x5a, 0x0c,   // original palette index 7
+		// 0x36, 0x8a, 0x10,   // original palette index 1
 	};
 	uint8_t hs_data[230] = {
 		0xff, 0xff, 0xff, 0xe0, 0x50, 0x54, 0x6d, 0x5c, 0x5a, 0xa3, 0xcd, 0x8d, 0x40, 0xe0, 0xf0, 0x1a, 

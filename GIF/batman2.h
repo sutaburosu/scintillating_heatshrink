@@ -1,5 +1,5 @@
-// "batman2" (GIF orig:144 raw_payload:280 shrunk_payload:98 total:106 bytes)
-// Compared to GIF: 73.61% 	Compared to raw: 37.86%
+// "batman2" (GIF orig:144 raw_payload:256 shrunk_payload:98 total:106 bytes)
+// Compared to GIF: 73.61% 	Compared to raw: 41.41%
 // using GIF index 11 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; transparency = 11; )
 
@@ -10,14 +10,14 @@ FL_PROGMEM const struct HSpr_batman2 {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 8;
 	uint8_t crgb[0] = {
-		// 0xc8, 0xc8, 0xc8,  // original palette index 11
-		// 0x00, 0x00, 0x00,  // original palette index 10
-		// 0xff, 0xff, 0xff,  // original palette index 0
-		// 0x99, 0x99, 0x99,  // original palette index 3
-		// 0x99, 0x66, 0x33,  // original palette index 4
-		// 0xff, 0xcc, 0x99,  // original palette index 1
-		// 0xcc, 0x99, 0x66,  // original palette index 2
-		// 0x66, 0x33, 0x00,  // original palette index 5
+		// 0xc8, 0xc8, 0xc8,   // original palette index 11
+		// 0x00, 0x00, 0x00,   // original palette index 10
+		// 0xff, 0xff, 0xff,   // original palette index 0
+		// 0x99, 0x99, 0x99,   // original palette index 3
+		// 0x99, 0x66, 0x33,   // original palette index 4
+		// 0xff, 0xcc, 0x99,   // original palette index 1
+		// 0xcc, 0x99, 0x66,   // original palette index 2
+		// 0x66, 0x33, 0x00,   // original palette index 5
 	};
 	uint8_t hs_data[98] = {
 		0xe4, 0x72, 0x39, 0x00, 0x50, 0x5f, 0xff, 0xff, 0xff, 0x32, 0x00, 0x05, 0x66, 0x99, 0xff, 0xf9, 

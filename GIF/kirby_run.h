@@ -1,5 +1,5 @@
-// "kirby_run" (GIF orig:573 raw_payload:1057 shrunk_payload:539 total:547 bytes)
-// Compared to GIF: 95.46% 	Compared to raw: 51.75%
+// "kirby_run" (GIF orig:573 raw_payload:1024 shrunk_payload:539 total:547 bytes)
+// Compared to GIF: 95.46% 	Compared to raw: 53.42%
 // using GIF index 10 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 10; loop = 0; transparency = 10; )
 
@@ -10,17 +10,17 @@ FL_PROGMEM const struct HSpr_kirby_run {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 11;
 	uint8_t crgb[0] = {
-		// 0x00, 0x00, 0x00,  // original palette index 10
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0xce, 0x10, 0xbd,  // original palette index 4
-		// 0xef, 0x42, 0xde,  // original palette index 5
-		// 0x73, 0x00, 0x5a,  // original palette index 2
-		// 0xff, 0xad, 0xf7,  // original palette index 8
-		// 0xff, 0x73, 0xef,  // original palette index 7
-		// 0xff, 0xff, 0xff,  // original palette index 9
-		// 0x31, 0x31, 0x31,  // original palette index 1
-		// 0xce, 0x00, 0x00,  // original palette index 3
-		// 0xff, 0x10, 0x21,  // original palette index 6
+		// 0x00, 0x00, 0x00,   // original palette index 10
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0xce, 0x10, 0xbd,   // original palette index 4
+		// 0xef, 0x42, 0xde,   // original palette index 5
+		// 0x73, 0x00, 0x5a,   // original palette index 2
+		// 0xff, 0xad, 0xf7,   // original palette index 8
+		// 0xff, 0x73, 0xef,   // original palette index 7
+		// 0xff, 0xff, 0xff,   // original palette index 9
+		// 0x31, 0x31, 0x31,   // original palette index 1
+		// 0xce, 0x00, 0x00,   // original palette index 3
+		// 0xff, 0x10, 0x21,   // original palette index 6
 	};
 	uint8_t hs_data[539] = {
 		0x00, 0x05, 0xe7, 0x44, 0x37, 0xbe, 0xfa, 0x17, 0x7a, 0xe7, 0x00, 0xad, 0x7f, 0xf5, 0xbf, 0x7f, 

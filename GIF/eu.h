@@ -1,5 +1,5 @@
-// "eu" (GIF orig:145 raw_payload:271 shrunk_payload:78 total:86 bytes)
-// Compared to GIF: 59.31% 	Compared to raw: 31.73%
+// "eu" (GIF orig:145 raw_payload:256 shrunk_payload:78 total:86 bytes)
+// Compared to GIF: 59.31% 	Compared to raw: 33.59%
 // using GIF index 3 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; transparency = 3; )
 
@@ -10,11 +10,11 @@ FL_PROGMEM const struct HSpr_eu {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 5;
 	uint8_t crgb[0] = {
-		// 0xde, 0x21, 0xad,  // original palette index 3
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0x31, 0x4a, 0x9c,  // original palette index 2
-		// 0xff, 0xce, 0x39,  // original palette index 4
-		// 0x18, 0x31, 0x84,  // original palette index 1
+		// 0xde, 0x21, 0xad,   // original palette index 3
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0x31, 0x4a, 0x9c,   // original palette index 2
+		// 0xff, 0xce, 0x39,   // original palette index 4
+		// 0x18, 0x31, 0x84,   // original palette index 1
 	};
 	uint8_t hs_data[78] = {
 		0xef, 0x48, 0x75, 0xa0, 0x50, 0x53, 0x1a, 0x56, 0x73, 0xff, 0xce, 0x9c, 0xc6, 0x26, 0x38, 0x40, 

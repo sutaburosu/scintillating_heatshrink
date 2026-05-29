@@ -1,5 +1,5 @@
-// "rockhell" (GIF orig:515 raw_payload:1045 shrunk_payload:400 total:408 bytes)
-// Compared to GIF: 79.22% 	Compared to raw: 39.04%
+// "rockhell" (GIF orig:515 raw_payload:1024 shrunk_payload:400 total:408 bytes)
+// Compared to GIF: 79.22% 	Compared to raw: 39.84%
 // using GIF index 0 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; loop = 32000; transparency = 0; )
 
@@ -10,13 +10,13 @@ FL_PROGMEM const struct HSpr_rockhell {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 7;
 	uint8_t crgb[0] = {
-		// 0x40, 0x20, 0x40,  // original palette index 0
-		// 0xc0, 0x40, 0x00,  // original palette index 12
-		// 0xe0, 0x80, 0x00,  // original palette index 13
-		// 0xe0, 0xc0, 0x00,  // original palette index 14
-		// 0xe0, 0xe0, 0xc0,  // original palette index 15
-		// 0x80, 0x20, 0x40,  // original palette index 11
-		// 0x40, 0x20, 0x40,  // original palette index 3
+		// 0x40, 0x20, 0x40,   // original palette index 0
+		// 0xc0, 0x40, 0x00,   // original palette index 12
+		// 0xe0, 0x80, 0x00,   // original palette index 13
+		// 0xe0, 0xc0, 0x00,   // original palette index 14
+		// 0xe0, 0xe0, 0xc0,   // original palette index 15
+		// 0x80, 0x20, 0x40,   // original palette index 11
+		// 0x40, 0x20, 0x40,   // original palette index 3
 	};
 	uint8_t hs_data[400] = {
 		0xa0, 0x48, 0x28, 0x1c, 0x0a, 0x04, 0x03, 0xc1, 0x80, 0x80, 0x78, 0x38, 0x10, 0x0f, 0x07, 0x83, 

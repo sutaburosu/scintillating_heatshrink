@@ -1,5 +1,5 @@
-// "sirlord" (GIF orig:313 raw_payload:1036 shrunk_payload:214 total:222 bytes)
-// Compared to GIF: 70.93% 	Compared to raw: 21.43%
+// "sirlord" (GIF orig:313 raw_payload:1024 shrunk_payload:214 total:222 bytes)
+// Compared to GIF: 70.93% 	Compared to raw: 21.68%
 // using GIF index 3 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 3; loop = 0; transparency = 3; )
 
@@ -10,10 +10,10 @@ FL_PROGMEM const struct HSpr_sirlord {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 4;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 3
-		// 0xff, 0xae, 0xc9,  // original palette index 1
-		// 0x7f, 0x7f, 0x7f,  // original palette index 0
-		// 0xc3, 0xc3, 0xc3,  // original palette index 2
+		// 0xff, 0xff, 0xff,   // original palette index 3
+		// 0xff, 0xae, 0xc9,   // original palette index 1
+		// 0x7f, 0x7f, 0x7f,   // original palette index 0
+		// 0xc3, 0xc3, 0xc3,   // original palette index 2
 	};
 	uint8_t hs_data[214] = {
 		0xff, 0x80, 0x01, 0x6b, 0xb9, 0x37, 0xfb, 0xfd, 0xff, 0x87, 0xc3, 0xe1, 0x87, 0x89, 0x40, 0x60, 

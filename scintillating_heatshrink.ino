@@ -345,8 +345,10 @@ void heatshrunk_sprite_prepare(HStatus * status, uint8_t hs_spr_n) {
   }
   
   // time to decompress the next frame?
-  if ((cfg.millis - status->last_millis) < duration) return;
-  if (frames == 1 && status->loops != 0) return;
+  if (duration == 0) {
+    if ((frames == 1 || frames == 0) && status->loops != 0) return;
+  } else if ((cfg.millis - status->last_millis) < duration) return;
+  if ((frames == 1 || frames == 0) && status->loops != 0) return;
 
   // need to loop/reset first?
   if (status->frame >= frames) {

@@ -1,5 +1,5 @@
-// "unionflag16" (GIF orig:123 raw_payload:277 shrunk_payload:94 total:102 bytes)
-// Compared to GIF: 82.93% 	Compared to raw: 36.82%
+// "unionflag16" (GIF orig:123 raw_payload:256 shrunk_payload:94 total:102 bytes)
+// Compared to GIF: 82.93% 	Compared to raw: 39.84%
 // ./heatshrink -w 8 -l 7 (background = 0; )
 
 FL_PROGMEM const struct HSpr_unionflag16 {
@@ -9,13 +9,13 @@ FL_PROGMEM const struct HSpr_unionflag16 {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 7;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 0
-		// 0x00, 0x00, 0x00,  // original palette index 1
-		// 0x7f, 0x7f, 0xcd,  // original palette index 5
-		// 0x00, 0x00, 0x9b,  // original palette index 3
-		// 0xff, 0x00, 0x00,  // original palette index 2
-		// 0xc7, 0xc7, 0xea,  // original palette index 6
-		// 0xff, 0x50, 0x50,  // original palette index 4
+		// 0xff, 0xff, 0xff,   // original palette index 0
+		// 0x00, 0x00, 0x00,   // original palette index 1
+		// 0x7f, 0x7f, 0xcd,   // original palette index 5
+		// 0x00, 0x00, 0x9b,   // original palette index 3
+		// 0xff, 0x00, 0x00,   // original palette index 2
+		// 0xc7, 0xc7, 0xea,   // original palette index 6
+		// 0xff, 0x50, 0x50,   // original palette index 4
 	};
 	uint8_t hs_data[94] = {
 		0xff, 0xff, 0xff, 0xe0, 0x50, 0x57, 0xfb, 0xff, 0x36, 0x01, 0x00, 0xcd, 0x82, 0x41, 0x71, 0xf8, 

@@ -1,5 +1,5 @@
-// "DigDug16x16" (GIF orig:5001 raw_payload:527 shrunk_payload:113 total:121 bytes)
-// Compared to GIF: 2.42% 	Compared to raw: 22.96%
+// "DigDug16x16" (GIF orig:5001 raw_payload:512 shrunk_payload:113 total:121 bytes)
+// Compared to GIF: 2.42% 	Compared to raw: 23.63%
 // using GIF index 0 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; loop = 0; )
 
@@ -10,11 +10,11 @@ FL_PROGMEM const struct HSpr_DigDug16x16 {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 5;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0x00,  // original palette index 0
-		// 0xcc, 0xcc, 0xcc,  // original palette index 1
-		// 0x00, 0x66, 0xcc,  // original palette index 2
-		// 0x00, 0x00, 0x00,  // original palette index 3
-		// 0xff, 0x00, 0x00,  // original palette index 4
+		// 0xff, 0xff, 0x00,   // original palette index 0
+		// 0xcc, 0xcc, 0xcc,   // original palette index 1
+		// 0x00, 0x66, 0xcc,   // original palette index 2
+		// 0x00, 0x00, 0x00,   // original palette index 3
+		// 0xff, 0x00, 0x00,   // original palette index 4
 	};
 	uint8_t hs_data[113] = {
 		0xff, 0xff, 0xe0, 0x1c, 0xce, 0x67, 0x32, 0x01, 0x66, 0xe6, 0x02, 0xc1, 0x88, 0xcb, 0x40, 0x60, 

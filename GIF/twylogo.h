@@ -1,5 +1,5 @@
-// "twylogo" (GIF orig:3976 raw_payload:15131 shrunk_payload:955 total:963 bytes)
-// Compared to GIF: 24.22% 	Compared to raw: 6.36%
+// "twylogo" (GIF orig:3976 raw_payload:15104 shrunk_payload:955 total:963 bytes)
+// Compared to GIF: 24.22% 	Compared to raw: 6.38%
 // using GIF index 0 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; loop = 1000; transparency = 0; )
 
@@ -10,15 +10,15 @@ FL_PROGMEM const struct HSpr_twylogo {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 9;
 	uint8_t crgb[0] = {
-		// 0x00, 0x25, 0xba,  // original palette index 0
-		// 0xc4, 0xc4, 0xc4,  // original palette index 6
-		// 0x84, 0x84, 0x84,  // original palette index 4
-		// 0x51, 0x51, 0x51,  // original palette index 5
-		// 0x00, 0x00, 0x00,  // original palette index 2
-		// 0x16, 0x16, 0x16,  // original palette index 8
-		// 0x1e, 0x96, 0xff,  // original palette index 1
-		// 0x00, 0xff, 0xe9,  // original palette index 3
-		// 0xff, 0xff, 0xff,  // original palette index 7
+		// 0x00, 0x25, 0xba,   // original palette index 0
+		// 0xc4, 0xc4, 0xc4,   // original palette index 6
+		// 0x84, 0x84, 0x84,   // original palette index 4
+		// 0x51, 0x51, 0x51,   // original palette index 5
+		// 0x00, 0x00, 0x00,   // original palette index 2
+		// 0x16, 0x16, 0x16,   // original palette index 8
+		// 0x1e, 0x96, 0xff,   // original palette index 1
+		// 0x00, 0xff, 0xe9,   // original palette index 3
+		// 0xff, 0xff, 0xff,   // original palette index 7
 	};
 	uint8_t hs_data[955] = {
 		0x80, 0x49, 0x77, 0x5c, 0x4e, 0x27, 0x13, 0x09, 0x84, 0xc2, 0x54, 0x6a, 0x35, 0x10, 0x68, 0x28, 

@@ -1,5 +1,5 @@
-// "mspacman" (GIF orig:306 raw_payload:1039 shrunk_payload:200 total:208 bytes)
-// Compared to GIF: 67.97% 	Compared to raw: 20.02%
+// "mspacman" (GIF orig:306 raw_payload:1024 shrunk_payload:200 total:208 bytes)
+// Compared to GIF: 67.97% 	Compared to raw: 20.31%
 // using GIF index 5 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 5; loop = 0; transparency = 5; )
 
@@ -10,11 +10,11 @@ FL_PROGMEM const struct HSpr_mspacman {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 5;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 5
-		// 0xff, 0x00, 0x00,  // original palette index 3
-		// 0xff, 0xff, 0x00,  // original palette index 4
-		// 0x21, 0x21, 0xde,  // original palette index 2
-		// 0x00, 0x00, 0x00,  // original palette index 7
+		// 0xff, 0xff, 0xff,   // original palette index 5
+		// 0xff, 0x00, 0x00,   // original palette index 3
+		// 0xff, 0xff, 0x00,   // original palette index 4
+		// 0x21, 0x21, 0xde,   // original palette index 2
+		// 0x00, 0x00, 0x00,   // original palette index 7
 	};
 	uint8_t hs_data[200] = {
 		0xff, 0x80, 0x01, 0x01, 0x41, 0xc0, 0x24, 0x32, 0x1e, 0xf0, 0xa4, 0xec, 0x06, 0x02, 0x0a, 0x11, 

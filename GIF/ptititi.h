@@ -1,5 +1,5 @@
-// "ptititi" (GIF orig:173 raw_payload:283 shrunk_payload:160 total:168 bytes)
-// Compared to GIF: 97.11% 	Compared to raw: 59.36%
+// "ptititi" (GIF orig:173 raw_payload:256 shrunk_payload:160 total:168 bytes)
+// Compared to GIF: 97.11% 	Compared to raw: 65.62%
 // using GIF index 3 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; transparency = 3; )
 
@@ -10,15 +10,15 @@ FL_PROGMEM const struct HSpr_ptititi {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 9;
 	uint8_t crgb[0] = {
-		// 0x42, 0x63, 0x8c,  // original palette index 3
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0xd6, 0xff, 0xd6,  // original palette index 8
-		// 0x7b, 0xad, 0x7b,  // original palette index 6
-		// 0x52, 0x8c, 0x4a,  // original palette index 4
-		// 0x9c, 0xce, 0x9c,  // original palette index 7
-		// 0x31, 0x63, 0x31,  // original palette index 2
-		// 0x5a, 0x5a, 0x5a,  // original palette index 5
-		// 0x18, 0x4a, 0x18,  // original palette index 1
+		// 0x42, 0x63, 0x8c,   // original palette index 3
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0xd6, 0xff, 0xd6,   // original palette index 8
+		// 0x7b, 0xad, 0x7b,   // original palette index 6
+		// 0x52, 0x8c, 0x4a,   // original palette index 4
+		// 0x9c, 0xce, 0x9c,   // original palette index 7
+		// 0x31, 0x63, 0x31,   // original palette index 2
+		// 0x5a, 0x5a, 0x5a,   // original palette index 5
+		// 0x18, 0x4a, 0x18,   // original palette index 1
 	};
 	uint8_t hs_data[160] = {
 		0xa1, 0x58, 0xf1, 0x80, 0x50, 0x5d, 0x6f, 0xff, 0x5a, 0xf7, 0xad, 0xbd, 0xd4, 0xb1, 0x94, 0xac, 

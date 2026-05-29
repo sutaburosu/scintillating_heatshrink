@@ -1,5 +1,5 @@
-// "c64" (GIF orig:590 raw_payload:274 shrunk_payload:83 total:91 bytes)
-// Compared to GIF: 15.42% 	Compared to raw: 33.21%
+// "c64" (GIF orig:590 raw_payload:256 shrunk_payload:83 total:91 bytes)
+// Compared to GIF: 15.42% 	Compared to raw: 35.55%
 // using GIF index 6 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 255; transparency = 6; )
 
@@ -10,12 +10,12 @@ FL_PROGMEM const struct HSpr_c64 {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 6;
 	uint8_t crgb[0] = {
-		// 0xc0, 0xc0, 0xc0,  // original palette index 6
-		// 0x00, 0x00, 0x00,  // original palette index 5
-		// 0x00, 0x3c, 0x96,  // original palette index 4
-		// 0x00, 0x50, 0xc8,  // original palette index 3
-		// 0xdc, 0x00, 0x00,  // original palette index 1
-		// 0xb4, 0x00, 0x00,  // original palette index 2
+		// 0xc0, 0xc0, 0xc0,   // original palette index 6
+		// 0x00, 0x00, 0x00,   // original palette index 5
+		// 0x00, 0x3c, 0x96,   // original palette index 4
+		// 0x00, 0x50, 0xc8,   // original palette index 3
+		// 0xdc, 0x00, 0x00,   // original palette index 1
+		// 0xb4, 0x00, 0x00,   // original palette index 2
 	};
 	uint8_t hs_data[83] = {
 		0xe0, 0x70, 0x38, 0x00, 0x60, 0x73, 0xcc, 0xb4, 0x02, 0xa1, 0xc8, 0xee, 0x40, 0x20, 0x1b, 0x41, 

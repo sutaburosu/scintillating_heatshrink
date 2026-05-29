@@ -1,5 +1,5 @@
-// "8bit_avatar" (GIF orig:397 raw_payload:1328 shrunk_payload:288 total:296 bytes)
-// Compared to GIF: 74.56% 	Compared to raw: 22.29%
+// "8bit_avatar" (GIF orig:397 raw_payload:1280 shrunk_payload:288 total:296 bytes)
+// Compared to GIF: 74.56% 	Compared to raw: 23.12%
 // using GIF index 15 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 15; loop = 0; transparency = 15; )
 
@@ -10,22 +10,22 @@ FL_PROGMEM const struct HSpr_8bit_avatar {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 16;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 15
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0xcc, 0xcc, 0xcc,  // original palette index 7
-		// 0x88, 0x88, 0x88,  // original palette index 6
-		// 0xff, 0x00, 0x00,  // original palette index 1
-		// 0xff, 0x6d, 0x6d,  // original palette index 11
-		// 0x55, 0x55, 0x55,  // original palette index 12
-		// 0xbb, 0xbb, 0xbb,  // original palette index 4
-		// 0x99, 0x99, 0x99,  // original palette index 13
-		// 0x22, 0x22, 0x22,  // original palette index 10
-		// 0xff, 0xff, 0xff,  // original palette index 2
-		// 0xdd, 0xdd, 0xdd,  // original palette index 8
-		// 0x66, 0x66, 0x66,  // original palette index 9
-		// 0x44, 0x44, 0x44,  // original palette index 3
-		// 0x77, 0x77, 0x77,  // original palette index 5
-		// 0xee, 0xee, 0xee,  // original palette index 14
+		// 0xff, 0xff, 0xff,   // original palette index 15
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0xcc, 0xcc, 0xcc,   // original palette index 7
+		// 0x88, 0x88, 0x88,   // original palette index 6
+		// 0xff, 0x00, 0x00,   // original palette index 1
+		// 0xff, 0x6d, 0x6d,   // original palette index 11
+		// 0x55, 0x55, 0x55,   // original palette index 12
+		// 0xbb, 0xbb, 0xbb,   // original palette index 4
+		// 0x99, 0x99, 0x99,   // original palette index 13
+		// 0x22, 0x22, 0x22,   // original palette index 10
+		// 0xff, 0xff, 0xff,   // original palette index 2
+		// 0xdd, 0xdd, 0xdd,   // original palette index 8
+		// 0x66, 0x66, 0x66,   // original palette index 9
+		// 0x44, 0x44, 0x44,   // original palette index 3
+		// 0x77, 0x77, 0x77,   // original palette index 5
+		// 0xee, 0xee, 0xee,   // original palette index 14
 	};
 	uint8_t hs_data[288] = {
 		0xff, 0xff, 0xff, 0xe0, 0x50, 0x5c, 0xce, 0x67, 0x33, 0x11, 0x88, 0xc4, 0x02, 0x41, 0x7f, 0xed, 

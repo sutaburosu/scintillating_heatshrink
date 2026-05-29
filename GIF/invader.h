@@ -1,5 +1,5 @@
-// "invader" (GIF orig:400 raw_payload:1548 shrunk_payload:209 total:217 bytes)
-// Compared to GIF: 54.25% 	Compared to raw: 14.02%
+// "invader" (GIF orig:400 raw_payload:1536 shrunk_payload:209 total:217 bytes)
+// Compared to GIF: 54.25% 	Compared to raw: 14.13%
 // using GIF index 3 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; loop = 0; transparency = 3; )
 
@@ -10,10 +10,10 @@ FL_PROGMEM const struct HSpr_invader {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 4;
 	uint8_t crgb[0] = {
-		// 0x00, 0x00, 0x00,  // original palette index 3
-		// 0xbf, 0xbf, 0xbf,  // original palette index 0
-		// 0x7f, 0x7f, 0x7f,  // original palette index 1
-		// 0x40, 0x40, 0x40,  // original palette index 2
+		// 0x00, 0x00, 0x00,   // original palette index 3
+		// 0xbf, 0xbf, 0xbf,   // original palette index 0
+		// 0x7f, 0x7f, 0x7f,   // original palette index 1
+		// 0x40, 0x40, 0x40,   // original palette index 2
 	};
 	uint8_t hs_data[209] = {
 		0x00, 0x02, 0xdf, 0xef, 0xf7, 0xf7, 0xfb, 0xfd, 0xfe, 0x81, 0x40, 0xa0, 0x06, 0x88, 0xc0, 0x60, 

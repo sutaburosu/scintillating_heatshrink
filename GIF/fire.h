@@ -1,5 +1,5 @@
-// "fire" (GIF orig:1127 raw_payload:2072 shrunk_payload:694 total:702 bytes)
-// Compared to GIF: 62.29% 	Compared to raw: 33.88%
+// "fire" (GIF orig:1127 raw_payload:2048 shrunk_payload:694 total:702 bytes)
+// Compared to GIF: 62.29% 	Compared to raw: 34.28%
 // using GIF index 0 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; loop = 1000; transparency = 0; )
 
@@ -10,14 +10,14 @@ FL_PROGMEM const struct HSpr_fire {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 8;
 	uint8_t crgb[0] = {
-		// 0xc6, 0xc6, 0xff,  // original palette index 0
-		// 0xc6, 0xa5, 0x00,  // original palette index 7
-		// 0x84, 0x42, 0x00,  // original palette index 6
-		// 0x63, 0x21, 0x00,  // original palette index 5
-		// 0xa5, 0x84, 0x00,  // original palette index 4
-		// 0xff, 0xc6, 0x42,  // original palette index 3
-		// 0xa5, 0x63, 0x00,  // original palette index 2
-		// 0xff, 0xff, 0x42,  // original palette index 1
+		// 0xc6, 0xc6, 0xff,   // original palette index 0
+		// 0xc6, 0xa5, 0x00,   // original palette index 7
+		// 0x84, 0x42, 0x00,   // original palette index 6
+		// 0x63, 0x21, 0x00,   // original palette index 5
+		// 0xa5, 0x84, 0x00,   // original palette index 4
+		// 0xff, 0xc6, 0x42,   // original palette index 3
+		// 0xa5, 0x63, 0x00,   // original palette index 2
+		// 0xff, 0xff, 0x42,   // original palette index 1
 	};
 	uint8_t hs_data[694] = {
 		0xe3, 0x71, 0xbf, 0xfc, 0x6d, 0x2c, 0x03, 0x09, 0x42, 0x80, 0x58, 0xe4, 0x30, 0x0d, 0x2e, 0x12, 

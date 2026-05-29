@@ -39,8 +39,8 @@ cli config set directories.data "$DATA_DIR"
 # ── 3. Install AVR core ─────────────────────────────────────────────
 echo "Installing AVR core..."
 cli core update-index
-cli core update
-cli core install arduino:avr@1.8.6
+cli core upgrade
+cli core install arduino:avr
 
 # ── 4. Install FastLED ──────────────────────────────────────────────
 echo "Installing FastLED library..."
@@ -82,8 +82,8 @@ export PATH="$AVR_BIN:$AVRDUDE_BIN:$BIN_DIR:$PATH"
 echo ""
 echo "=== Setup Summary ==="
 echo "arduino-cli:  $(cli version | head -1)"
-echo "AVR core:     $(cli core list --format table 2>/dev/null | grep arduino:avr || echo '?')"
-echo "FastLED:      $(cli lib list --format table 2>/dev/null | grep FastLED || echo '?')"
+echo "AVR core:     $(cli core list 2>/dev/null | grep arduino:avr || echo '?')"
+echo "FastLED:      $(cli lib list 2>/dev/null | grep FastLED || echo '?')"
 echo ""
 echo "AVR tools:"
 echo "  avr-gcc:     $(avr-gcc --version | head -1)"

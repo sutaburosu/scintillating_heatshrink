@@ -37,6 +37,16 @@ class GifConverter:
         self.compression_log: list[str] = []
         self.num_frames = 0
         self._compressed_bytes: bytes | None = None
+ 
+
+    def _get_palette_source(self):
+        """Return the best available palette source (global or first frame)."""
+        if self.gif.global_palette and self.gif.global_palette.palette:
+            return self.gif.global_palette.palette
+        for frame in ImageSequence.Iterator(self.gif):
+            if frame.palette and frame.palette.palette:
+                return frame.palette.palette
+        return None
 
     def find_transparent_index(self):
         """Find the GIF's background or transparency index to use as our index 0."""
@@ -55,42 +65,48 @@ class GifConverter:
         self.palette_bwd_map[self.palette_i] = self.transparent_idx
         self.palette_i += 1
 
-        # Copy its color into our palette
-        global_palette = self.gif.global_palette.palette
+        # Check for L-mode (grayscale) GIFs with no palette
+        if self.gif.mode == 'L' and not self.gif.global_palette:
+            self.compression_log.append('// L-mode (grayscale) GIF - synthetic palette\n')
+            # Initialize transparent color as black (index 0 is the mask)
+            self.final_palette.extend([0, 0, 0])
+            # Pre-populate palette with all 256 gray values
+            for i in range(256):
+                if i == self.transparent_idx:
+                    continue
+                self.final_palette.extend([i, i, i])
+                self.palette_fwd_map[i] = self.palette_i
+                self.palette_bwd_map[self.palette_i] = i
+                self.palette_i += 1
+            return
+
+        # Copy transparent color from palette source
+        pal_source = self._get_palette_source()
         start = self.transparent_idx * 3
-        self.final_palette.extend(global_palette[start:start + 3])
+        self.final_palette.extend(pal_source[start:start + 3])
 
     def extract_frame_pixels(self, frame):
-        """Extract pixel data from a frame, handling P and RGBA modes.
+        """Extract pixel data from a frame, handling P, RGB, RGBA, and L modes.
 
         Returns an iterable of palette indices (integers).
         """
-        if hasattr(frame, 'get_flattened_data'):
-            pixel_data = frame.get_flattened_data()
-        else:
-            pixel_data = frame.getdata()
+        pixel_data = frame.get_flattened_data()
 
-        if frame.mode == 'P':
+        if frame.mode in ('P', 'L'):
             return pixel_data
 
-        # RGBA/RGB mode: map each pixel to the closest palette index
+        # RGB/RGBA mode: map each pixel to the closest palette index
         indices = []
         for pixel in pixel_data:
-            if isinstance(pixel, tuple):
-                red = pixel[0]
-                green = pixel[1]
-                blue = pixel[2]
-                alpha = pixel[3] if len(pixel) == 4 else 255
-            else:
-                indices.append(pixel)
-                continue
+            red = pixel[0]
+            green = pixel[1]
+            blue = pixel[2]
+            alpha = pixel[3] if len(pixel) == 4 else 255
 
-            # Transparent pixels map to index 0
             if alpha < 128:
                 indices.append(0)
                 continue
 
-            # Find closest match in final_palette using Euclidean distance
             min_dist = float('inf')
             closest_idx = 0
             for i in range(0, len(self.final_palette), 3):
@@ -105,27 +121,58 @@ class GifConverter:
 
         return indices
 
+    def _rebuild_frame_mapping(self, frame_pal):
+        """Rebuild palette_fwd_map/bwd_map for a frame with a different local palette."""
+        for idx in range(len(frame_pal) // 3):
+            if self.palette_fwd_map[idx] is not None:
+                continue
+            rgb = bytes(frame_pal[idx * 3:(idx + 1) * 3])
+            existing_idx = -1
+            for i in range(3, len(self.final_palette), 3):
+                if self.final_palette[i:i+3] == rgb:
+                    existing_idx = i // 3
+                    break
+            if existing_idx == -1:
+                self.final_palette.extend(rgb)
+                self.palette_fwd_map[idx] = self.palette_i
+                self.palette_bwd_map[self.palette_i] = idx
+                self.palette_i += 1
+            else:
+                self.palette_fwd_map[idx] = existing_idx
+                self.palette_bwd_map[existing_idx] = idx
+
     def process_frames(self):
         """Iterate over all frames, remap palette indices, and collect pixel data."""
-        global_palette = self.gif.global_palette.palette
+        global_pal = self.gif.global_palette.palette if self.gif.global_palette else None
 
         for frame in ImageSequence.Iterator(self.gif):
-            if frame.palette.palette != global_palette:
-                raise ValueError('GIF palette is modified between frames. Unsupported currently.')
+            frame_pal = frame.palette.palette if frame.palette else None
+            # Use per-frame palette when it differs from global, or when there is no global palette
+            if frame_pal is not None and frame_pal != global_pal:
+                self._rebuild_frame_mapping(frame_pal)
 
+            is_rgb = frame.mode in ('RGB', 'RGBA')
             for pixel_idx in self.extract_frame_pixels(frame):
+                # RGB/RGBA frames: extract_frame_pixels returns palette indices directly
+                # P/L mode frames: extract_frame_pixels returns GIF indices, need remapping
+                if is_rgb:
+                    self.pixels_raw.append(pixel_idx)
+                    continue
+
                 mapped = self.palette_fwd_map[pixel_idx]
                 if mapped is not None:
                     self.pixels_raw.append(mapped)
                     continue
 
                 # New color: check if it's a duplicate of an existing palette entry
-                rgb = bytearray(global_palette[pixel_idx * 3:(pixel_idx + 1) * 3])
+                rgb = bytes(frame_pal[pixel_idx * 3:(pixel_idx + 1) * 3])
                 existing_idx = -1
-                if rgb in self.final_palette[3:]:
-                    existing_idx = self.final_palette.index(rgb)
+                for i in range(3, len(self.final_palette), 3):
+                    if self.final_palette[i:i+3] == rgb:
+                        existing_idx = i // 3
+                        break
 
-                if existing_idx < 1:  # don't remap anything to our transparency index
+                if existing_idx == -1:
                     self.final_palette.extend(rgb)
                     self.pixels_raw.append(self.palette_i)
                     self.palette_fwd_map[pixel_idx] = self.palette_i
@@ -194,7 +241,7 @@ class GifConverter:
                 g = self.final_palette[local_idx * 3 + 1]
                 b = self.final_palette[local_idx * 3 + 2]
                 out.write(f'\t\t// 0x{r:02x}, 0x{g:02x}, 0x{b:02x}, '
-                          f'// original palette index {orig_idx}\n')
+                          f'  // original palette index {orig_idx}\n')
             out.write('\t};\n')
 
             # Compressed data section

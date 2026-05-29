@@ -1,5 +1,5 @@
-// "16x16_oric" (GIF orig:3947 raw_payload:6752 shrunk_payload:3051 total:3059 bytes)
-// Compared to GIF: 77.50% 	Compared to raw: 45.31%
+// "16x16_oric" (GIF orig:3947 raw_payload:6656 shrunk_payload:3051 total:3059 bytes)
+// Compared to GIF: 77.50% 	Compared to raw: 45.96%
 // using GIF index 30 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 30; loop = 0; transparency = 30; )
 
@@ -10,38 +10,38 @@ FL_PROGMEM const struct HSpr_16x16_oric {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 32;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 30
-		// 0xff, 0xff, 0xff,  // original palette index 31
-		// 0xc6, 0xc6, 0xc6,  // original palette index 15
-		// 0x8c, 0x8c, 0x8c,  // original palette index 12
-		// 0x7b, 0x7b, 0x7b,  // original palette index 11
-		// 0xa5, 0xa5, 0xa5,  // original palette index 14
-		// 0xe7, 0xe7, 0xe7,  // original palette index 17
-		// 0x29, 0x29, 0x29,  // original palette index 7
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0x21, 0x00, 0x00,  // original palette index 5
-		// 0xff, 0x00, 0x00,  // original palette index 21
-		// 0xf7, 0xb5, 0xb5,  // original palette index 19
-		// 0x08, 0x00, 0x00,  // original palette index 1
-		// 0xd6, 0x00, 0x00,  // original palette index 16
-		// 0xff, 0x6b, 0x6b,  // original palette index 24
-		// 0xff, 0xf7, 0xf7,  // original palette index 29
-		// 0x08, 0x08, 0x08,  // original palette index 2
-		// 0xff, 0x29, 0x29,  // original palette index 22
-		// 0x5a, 0x4a, 0x4a,  // original palette index 10
-		// 0xff, 0x7b, 0x7b,  // original palette index 25
-		// 0xf7, 0x00, 0x00,  // original palette index 18
-		// 0xf7, 0xf7, 0xf7,  // original palette index 20
-		// 0x10, 0x10, 0x10,  // original palette index 3
-		// 0xff, 0xe7, 0xe7,  // original palette index 27
-		// 0x42, 0x42, 0x42,  // original palette index 9
-		// 0xff, 0x5a, 0x5a,  // original palette index 23
-		// 0x39, 0x39, 0x39,  // original palette index 8
-		// 0x21, 0x21, 0x21,  // original palette index 6
-		// 0xff, 0xd6, 0xd6,  // original palette index 26
-		// 0x94, 0x29, 0x29,  // original palette index 13
-		// 0xff, 0xef, 0xef,  // original palette index 28
-		// 0x18, 0x18, 0x18,  // original palette index 4
+		// 0xff, 0xff, 0xff,   // original palette index 30
+		// 0xff, 0xff, 0xff,   // original palette index 31
+		// 0xc6, 0xc6, 0xc6,   // original palette index 15
+		// 0x8c, 0x8c, 0x8c,   // original palette index 12
+		// 0x7b, 0x7b, 0x7b,   // original palette index 11
+		// 0xa5, 0xa5, 0xa5,   // original palette index 14
+		// 0xe7, 0xe7, 0xe7,   // original palette index 17
+		// 0x29, 0x29, 0x29,   // original palette index 7
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0x21, 0x00, 0x00,   // original palette index 5
+		// 0xff, 0x00, 0x00,   // original palette index 21
+		// 0xf7, 0xb5, 0xb5,   // original palette index 19
+		// 0x08, 0x00, 0x00,   // original palette index 1
+		// 0xd6, 0x00, 0x00,   // original palette index 16
+		// 0xff, 0x6b, 0x6b,   // original palette index 24
+		// 0xff, 0xf7, 0xf7,   // original palette index 29
+		// 0x08, 0x08, 0x08,   // original palette index 2
+		// 0xff, 0x29, 0x29,   // original palette index 22
+		// 0x5a, 0x4a, 0x4a,   // original palette index 10
+		// 0xff, 0x7b, 0x7b,   // original palette index 25
+		// 0xf7, 0x00, 0x00,   // original palette index 18
+		// 0xf7, 0xf7, 0xf7,   // original palette index 20
+		// 0x10, 0x10, 0x10,   // original palette index 3
+		// 0xff, 0xe7, 0xe7,   // original palette index 27
+		// 0x42, 0x42, 0x42,   // original palette index 9
+		// 0xff, 0x5a, 0x5a,   // original palette index 23
+		// 0x39, 0x39, 0x39,   // original palette index 8
+		// 0x21, 0x21, 0x21,   // original palette index 6
+		// 0xff, 0xd6, 0xd6,   // original palette index 26
+		// 0x94, 0x29, 0x29,   // original palette index 13
+		// 0xff, 0xef, 0xef,   // original palette index 28
+		// 0x18, 0x18, 0x18,   // original palette index 4
 	};
 	uint8_t hs_data[3051] = {
 		0xff, 0x80, 0x02, 0x71, 0xb8, 0xdc, 0x6c, 0x66, 0x33, 0x19, 0x7b, 0xbd, 0xde, 0xf4, 0xba, 0x5d, 

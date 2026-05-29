@@ -1,5 +1,5 @@
-// "octorokblue" (GIF orig:380 raw_payload:786 shrunk_payload:369 total:377 bytes)
-// Compared to GIF: 99.21% 	Compared to raw: 47.96%
+// "octorokblue" (GIF orig:380 raw_payload:768 shrunk_payload:369 total:377 bytes)
+// Compared to GIF: 99.21% 	Compared to raw: 49.09%
 // using GIF index 4 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 4; loop = 0; transparency = 4; )
 
@@ -10,12 +10,12 @@ FL_PROGMEM const struct HSpr_octorokblue {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 6;
 	uint8_t crgb[0] = {
-		// 0xff, 0x00, 0xff,  // original palette index 4
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0x48, 0x60, 0xa8,  // original palette index 1
-		// 0x78, 0x98, 0xf8,  // original palette index 2
-		// 0xa8, 0xc8, 0xf8,  // original palette index 3
-		// 0xf8, 0xf8, 0xf8,  // original palette index 5
+		// 0xff, 0x00, 0xff,   // original palette index 4
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0x48, 0x60, 0xa8,   // original palette index 1
+		// 0x78, 0x98, 0xf8,   // original palette index 2
+		// 0xa8, 0xc8, 0xf8,   // original palette index 3
+		// 0xf8, 0xf8, 0xf8,   // original palette index 5
 	};
 	uint8_t hs_data[369] = {
 		0xff, 0x80, 0x41, 0x40, 0x20, 0x14, 0x8b, 0x06, 0xa2, 0xf1, 0x98, 0xfc, 0x6a, 0x39, 0x1f, 0x80, 

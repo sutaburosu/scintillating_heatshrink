@@ -1,5 +1,5 @@
-// "ghost3" (GIF orig:620 raw_payload:530 shrunk_payload:177 total:185 bytes)
-// Compared to GIF: 29.84% 	Compared to raw: 34.91%
+// "ghost3" (GIF orig:620 raw_payload:512 shrunk_payload:177 total:185 bytes)
+// Compared to GIF: 29.84% 	Compared to raw: 36.13%
 // using GIF index 1 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 1; loop = 0; transparency = 1; )
 
@@ -10,12 +10,12 @@ FL_PROGMEM const struct HSpr_ghost3 {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 6;
 	uint8_t crgb[0] = {
-		// 0x00, 0x00, 0x00,  // original palette index 1
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0xc2, 0xc2, 0xc2,  // original palette index 3
-		// 0xe2, 0xe2, 0xe2,  // original palette index 4
-		// 0xfa, 0xfa, 0xfa,  // original palette index 2
-		// 0xfa, 0x10, 0x59,  // original palette index 5
+		// 0x00, 0x00, 0x00,   // original palette index 1
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0xc2, 0xc2, 0xc2,   // original palette index 3
+		// 0xe2, 0xe2, 0xe2,   // original palette index 4
+		// 0xfa, 0xfa, 0xfa,   // original palette index 2
+		// 0xfa, 0x10, 0x59,   // original palette index 5
 	};
 	uint8_t hs_data[177] = {
 		0x00, 0x05, 0xe1, 0x70, 0xb8, 0x5e, 0x2f, 0x17, 0x8b, 0xf4, 0x00, 0x05, 0x10, 0xac, 0x84, 0x42, 

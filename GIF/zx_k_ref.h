@@ -1,5 +1,5 @@
-// "zx_k_ref" (GIF orig:186 raw_payload:521 shrunk_payload:57 total:65 bytes)
-// Compared to GIF: 34.95% 	Compared to raw: 12.48%
+// "zx_k_ref" (GIF orig:186 raw_payload:512 shrunk_payload:57 total:65 bytes)
+// Compared to GIF: 34.95% 	Compared to raw: 12.70%
 // ./heatshrink -w 8 -l 7 (background = 15; loop = 0; )
 
 FL_PROGMEM const struct HSpr_zx_k_ref {
@@ -9,9 +9,9 @@ FL_PROGMEM const struct HSpr_zx_k_ref {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 3;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 15
-		// 0xc0, 0xc0, 0xc0,  // original palette index 7
-		// 0x00, 0x00, 0x00,  // original palette index 0
+		// 0xff, 0xff, 0xff,   // original palette index 15
+		// 0xc0, 0xc0, 0xc0,   // original palette index 7
+		// 0x00, 0x00, 0x00,   // original palette index 0
 	};
 	uint8_t hs_data[57] = {
 		0xff, 0xff, 0xff, 0xfc, 0x0e, 0x07, 0x00, 0x10, 0x0a, 0x02, 0x00, 0xeb, 0x02, 0x00, 0x06, 0x07, 

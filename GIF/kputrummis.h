@@ -1,5 +1,5 @@
-// "kputrummis" (GIF orig:462 raw_payload:599 shrunk_payload:388 total:396 bytes)
-// Compared to GIF: 85.71% 	Compared to raw: 66.11%
+// "kputrummis" (GIF orig:462 raw_payload:512 shrunk_payload:388 total:396 bytes)
+// Compared to GIF: 85.71% 	Compared to raw: 77.34%
 // using GIF index 0 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; loop = 0; transparency = 0; )
 
@@ -10,35 +10,35 @@ FL_PROGMEM const struct HSpr_kputrummis {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 29;
 	uint8_t crgb[0] = {
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0x29, 0x29, 0x29,  // original palette index 3
-		// 0x5a, 0x3d, 0x29,  // original palette index 17
-		// 0x80, 0x4f, 0x34,  // original palette index 19
-		// 0xb8, 0x66, 0x32,  // original palette index 22
-		// 0xd8, 0x87, 0x53,  // original palette index 28
-		// 0x4c, 0x36, 0x2e,  // original palette index 16
-		// 0xa3, 0x59, 0x2c,  // original palette index 21
-		// 0xbe, 0x7e, 0x55,  // original palette index 27
-		// 0x21, 0x21, 0x21,  // original palette index 2
-		// 0x90, 0x53, 0x27,  // original palette index 20
-		// 0x71, 0x48, 0x2f,  // original palette index 18
-		// 0x31, 0x35, 0x4a,  // original palette index 10
-		// 0x50, 0x49, 0x63,  // original palette index 23
-		// 0x42, 0x57, 0x94,  // original palette index 15
-		// 0x3c, 0x47, 0x6b,  // original palette index 13
-		// 0xa0, 0x65, 0x49,  // original palette index 25
-		// 0x56, 0x58, 0x86,  // original palette index 24
-		// 0xb9, 0x97, 0x7f,  // original palette index 29
-		// 0xcf, 0xc6, 0xde,  // original palette index 30
-		// 0x3d, 0x42, 0x5a,  // original palette index 12
-		// 0x42, 0x39, 0x4a,  // original palette index 11
-		// 0x78, 0x68, 0x96,  // original palette index 26
-		// 0x31, 0x29, 0x21,  // original palette index 4
-		// 0x2d, 0x2d, 0x39,  // original palette index 8
-		// 0x42, 0x31, 0x25,  // original palette index 7
-		// 0x3d, 0x4a, 0x7b,  // original palette index 14
-		// 0x39, 0x34, 0x39,  // original palette index 9
-		// 0x39, 0x31, 0x29,  // original palette index 6
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0x29, 0x29, 0x29,   // original palette index 3
+		// 0x5a, 0x3d, 0x29,   // original palette index 17
+		// 0x80, 0x4f, 0x34,   // original palette index 19
+		// 0xb8, 0x66, 0x32,   // original palette index 22
+		// 0xd8, 0x87, 0x53,   // original palette index 28
+		// 0x4c, 0x36, 0x2e,   // original palette index 16
+		// 0xa3, 0x59, 0x2c,   // original palette index 21
+		// 0xbe, 0x7e, 0x55,   // original palette index 27
+		// 0x21, 0x21, 0x21,   // original palette index 2
+		// 0x90, 0x53, 0x27,   // original palette index 20
+		// 0x71, 0x48, 0x2f,   // original palette index 18
+		// 0x31, 0x35, 0x4a,   // original palette index 10
+		// 0x50, 0x49, 0x63,   // original palette index 23
+		// 0x42, 0x57, 0x94,   // original palette index 15
+		// 0x3c, 0x47, 0x6b,   // original palette index 13
+		// 0xa0, 0x65, 0x49,   // original palette index 25
+		// 0x56, 0x58, 0x86,   // original palette index 24
+		// 0xb9, 0x97, 0x7f,   // original palette index 29
+		// 0xcf, 0xc6, 0xde,   // original palette index 30
+		// 0x3d, 0x42, 0x5a,   // original palette index 12
+		// 0x42, 0x39, 0x4a,   // original palette index 11
+		// 0x78, 0x68, 0x96,   // original palette index 26
+		// 0x31, 0x29, 0x21,   // original palette index 4
+		// 0x2d, 0x2d, 0x39,   // original palette index 8
+		// 0x42, 0x31, 0x25,   // original palette index 7
+		// 0x3d, 0x4a, 0x7b,   // original palette index 14
+		// 0x39, 0x34, 0x39,   // original palette index 9
+		// 0x39, 0x31, 0x29,   // original palette index 6
 	};
 	uint8_t hs_data[388] = {
 		0x00, 0x02, 0x94, 0xca, 0x65, 0x35, 0xa9, 0xec, 0xa7, 0x01, 0x4f, 0x9a, 0x6e, 0x2c, 0xd3, 0x2e, 

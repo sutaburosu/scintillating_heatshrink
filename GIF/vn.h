@@ -1,5 +1,5 @@
-// "vn" (GIF orig:184 raw_payload:524 shrunk_payload:60 total:68 bytes)
-// Compared to GIF: 36.96% 	Compared to raw: 12.98%
+// "vn" (GIF orig:184 raw_payload:512 shrunk_payload:60 total:68 bytes)
+// Compared to GIF: 36.96% 	Compared to raw: 13.28%
 // using GIF index 4 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 0; loop = 0; transparency = 4; )
 
@@ -10,10 +10,10 @@ FL_PROGMEM const struct HSpr_vn {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 4;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 4
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0xb7, 0xff, 0xb3,  // original palette index 3
-		// 0x05, 0x70, 0x00,  // original palette index 2
+		// 0xff, 0xff, 0xff,   // original palette index 4
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0xb7, 0xff, 0xb3,   // original palette index 3
+		// 0x05, 0x70, 0x00,   // original palette index 2
 	};
 	uint8_t hs_data[60] = {
 		0xff, 0xff, 0xff, 0xe0, 0x50, 0x5b, 0x7f, 0xfe, 0xce, 0x0b, 0x70, 0x80, 0x40, 0x40, 0x03, 0xe0, 

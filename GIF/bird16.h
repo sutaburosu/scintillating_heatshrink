@@ -1,5 +1,5 @@
-// "bird16" (GIF orig:234 raw_payload:524 shrunk_payload:183 total:191 bytes)
-// Compared to GIF: 81.62% 	Compared to raw: 36.45%
+// "bird16" (GIF orig:234 raw_payload:512 shrunk_payload:183 total:191 bytes)
+// Compared to GIF: 81.62% 	Compared to raw: 37.30%
 // using GIF index 3 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 3; loop = 0; transparency = 3; )
 
@@ -10,10 +10,10 @@ FL_PROGMEM const struct HSpr_bird16 {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 4;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 3
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0x00, 0xd2, 0xff,  // original palette index 1
-		// 0xff, 0xe1, 0xaf,  // original palette index 2
+		// 0xff, 0xff, 0xff,   // original palette index 3
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0x00, 0xd2, 0xff,   // original palette index 1
+		// 0xff, 0xe1, 0xaf,   // original palette index 2
 	};
 	uint8_t hs_data[183] = {
 		0xff, 0xff, 0xff, 0xe0, 0x60, 0x7d, 0x2f, 0xff, 0xff, 0xc3, 0xaf, 0x08, 0x04, 0x80, 0xc0, 0x43, 

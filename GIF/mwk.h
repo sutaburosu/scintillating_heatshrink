@@ -1,5 +1,5 @@
-// "mwk" (GIF orig:462 raw_payload:1292 shrunk_payload:251 total:259 bytes)
-// Compared to GIF: 56.06% 	Compared to raw: 20.05%
+// "mwk" (GIF orig:462 raw_payload:1280 shrunk_payload:251 total:259 bytes)
+// Compared to GIF: 56.06% 	Compared to raw: 20.23%
 // using GIF index 3 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 3; loop = 0; transparency = 3; )
 
@@ -10,10 +10,10 @@ FL_PROGMEM const struct HSpr_mwk {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 4;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 3
-		// 0x66, 0x66, 0x66,  // original palette index 2
-		// 0xad, 0xad, 0xad,  // original palette index 1
-		// 0xff, 0xff, 0xff,  // original palette index 0
+		// 0xff, 0xff, 0xff,   // original palette index 3
+		// 0x66, 0x66, 0x66,   // original palette index 2
+		// 0xad, 0xad, 0xad,   // original palette index 1
+		// 0xff, 0xff, 0xff,   // original palette index 0
 	};
 	uint8_t hs_data[251] = {
 		0xff, 0xff, 0xff, 0xf6, 0x6b, 0x35, 0x9b, 0x5b, 0xad, 0xd6, 0x82, 0x01, 0x07, 0xc9, 0xc0, 0x60, 

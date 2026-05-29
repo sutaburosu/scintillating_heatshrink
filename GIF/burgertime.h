@@ -1,5 +1,5 @@
-// "burgertime" (GIF orig:2052 raw_payload:6674 shrunk_payload:1202 total:1210 bytes)
-// Compared to GIF: 58.97% 	Compared to raw: 18.13%
+// "burgertime" (GIF orig:2052 raw_payload:6656 shrunk_payload:1202 total:1210 bytes)
+// Compared to GIF: 58.97% 	Compared to raw: 18.18%
 // using GIF index 6 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 6; loop = 0; transparency = 6; )
 
@@ -10,12 +10,12 @@ FL_PROGMEM const struct HSpr_burgertime {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 6;
 	uint8_t crgb[0] = {
-		// 0xff, 0x00, 0xff,  // original palette index 6
-		// 0xff, 0xff, 0xde,  // original palette index 5
-		// 0xde, 0x6b, 0x00,  // original palette index 1
-		// 0xff, 0xbd, 0x00,  // original palette index 3
-		// 0x00, 0xff, 0x00,  // original palette index 0
-		// 0xff, 0xff, 0x00,  // original palette index 4
+		// 0xff, 0x00, 0xff,   // original palette index 6
+		// 0xff, 0xff, 0xde,   // original palette index 5
+		// 0xde, 0x6b, 0x00,   // original palette index 1
+		// 0xff, 0xbd, 0x00,   // original palette index 3
+		// 0x00, 0xff, 0x00,   // original palette index 0
+		// 0xff, 0xff, 0x00,   // original palette index 4
 	};
 	uint8_t hs_data[1202] = {
 		0xff, 0xc0, 0x3f, 0xff, 0xff, 0xff, 0x7b, 0xbd, 0x6b, 0x80, 0x7f, 0xf7, 0xa0, 0xc0, 0xa1, 0x40, 

@@ -1,5 +1,5 @@
-// "pouet_avatar_poi_charly_walk2" (GIF orig:964 raw_payload:2075 shrunk_payload:768 total:776 bytes)
-// Compared to GIF: 80.50% 	Compared to raw: 37.40%
+// "pouet_avatar_poi_charly_walk2" (GIF orig:964 raw_payload:2048 shrunk_payload:768 total:776 bytes)
+// Compared to GIF: 80.50% 	Compared to raw: 37.89%
 // using GIF index 8 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 8; loop = 0; transparency = 8; )
 
@@ -10,15 +10,15 @@ FL_PROGMEM const struct HSpr_pouet_avatar_poi_charly_walk2 {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 9;
 	uint8_t crgb[0] = {
-		// 0x55, 0x77, 0x99,  // original palette index 8
-		// 0x3e, 0x3f, 0x50,  // original palette index 2
-		// 0x27, 0x07, 0x07,  // original palette index 7
-		// 0xa0, 0x20, 0x00,  // original palette index 1
-		// 0xdb, 0xbb, 0x1b,  // original palette index 4
-		// 0x8e, 0x4e, 0x0e,  // original palette index 6
-		// 0xb4, 0x74, 0x34,  // original palette index 5
-		// 0xdf, 0xdf, 0xdf,  // original palette index 0
-		// 0x4c, 0x6e, 0x90,  // original palette index 3
+		// 0x55, 0x77, 0x99,   // original palette index 8
+		// 0x3e, 0x3f, 0x50,   // original palette index 2
+		// 0x27, 0x07, 0x07,   // original palette index 7
+		// 0xa0, 0x20, 0x00,   // original palette index 1
+		// 0xdb, 0xbb, 0x1b,   // original palette index 4
+		// 0x8e, 0x4e, 0x0e,   // original palette index 6
+		// 0xb4, 0x74, 0x34,   // original palette index 5
+		// 0xdf, 0xdf, 0xdf,   // original palette index 0
+		// 0x4c, 0x6e, 0x90,   // original palette index 3
 	};
 	uint8_t hs_data[768] = {
 		0xaa, 0xdd, 0xf3, 0x33, 0xe9, 0xfd, 0x42, 0x4f, 0x07, 0x83, 0xe8, 0x24, 0x10, 0x0e, 0xde, 0xee, 

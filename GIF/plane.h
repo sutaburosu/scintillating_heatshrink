@@ -1,5 +1,5 @@
-// "plane" (GIF orig:360 raw_payload:798 shrunk_payload:141 total:149 bytes)
-// Compared to GIF: 41.39% 	Compared to raw: 18.67%
+// "plane" (GIF orig:360 raw_payload:768 shrunk_payload:141 total:149 bytes)
+// Compared to GIF: 41.39% 	Compared to raw: 19.40%
 // using GIF index 15 as our transparency index 0
 // ./heatshrink -w 8 -l 7 (background = 8; loop = 0; transparency = 15; )
 
@@ -10,16 +10,16 @@ FL_PROGMEM const struct HSpr_plane {
 	uint8_t flags = 0;
 	uint8_t palette_entries = 10;
 	uint8_t crgb[0] = {
-		// 0xff, 0xff, 0xff,  // original palette index 15
-		// 0xff, 0xff, 0xff,  // original palette index 8
-		// 0xff, 0x00, 0x00,  // original palette index 1
-		// 0x80, 0x80, 0x80,  // original palette index 6
-		// 0x00, 0x00, 0x00,  // original palette index 0
-		// 0x00, 0x6c, 0xd9,  // original palette index 4
-		// 0x00, 0x40, 0x80,  // original palette index 2
-		// 0x00, 0x80, 0xff,  // original palette index 5
-		// 0x80, 0xff, 0xff,  // original palette index 7
-		// 0x00, 0x5c, 0xb9,  // original palette index 3
+		// 0xff, 0xff, 0xff,   // original palette index 15
+		// 0xff, 0xff, 0xff,   // original palette index 8
+		// 0xff, 0x00, 0x00,   // original palette index 1
+		// 0x80, 0x80, 0x80,   // original palette index 6
+		// 0x00, 0x00, 0x00,   // original palette index 0
+		// 0x00, 0x6c, 0xd9,   // original palette index 4
+		// 0x00, 0x40, 0x80,   // original palette index 2
+		// 0x00, 0x80, 0xff,   // original palette index 5
+		// 0x80, 0xff, 0xff,   // original palette index 7
+		// 0x00, 0x5c, 0xb9,   // original palette index 3
 	};
 	uint8_t hs_data[141] = {
 		0xff, 0x80, 0x02, 0xc0, 0x20, 0x18, 0x0c, 0x06, 0x00, 0x1e, 0x0e, 0xd9, 0xd9, 0x80, 0x50, 0x30, 
