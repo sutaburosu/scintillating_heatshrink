@@ -8,6 +8,8 @@ magnified, alongside the source GIF for visual comparison.
 Usage:
     python3 view_sprites.py                     # Show all GIF headers in GIF/
     python3 view_sprites.py GIF/owl.h GIF/fire.h  # Show specific headers
+    python3 view_sprites.py GIF/                # Show all headers in GIF/
+    python3 view_sprites.py GIF/ arduino/       # Show all headers in both dirs
 
 Keyboard shortcuts:
     Space: Play/Pause
@@ -21,6 +23,7 @@ import sys
 import os
 import re
 import glob
+import signal
 import argparse
 from pathlib import Path
 from PIL import Image
@@ -196,22 +199,15 @@ class BackgroundWidget(QWidget):
         super().__init__(parent)
         self.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents)
         self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground)
-        self.offset_x = 0.0
-        self.offset_y = 0.0
+        self.phase = 0.0
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.animate)
         self.timer.start(33)  # ~30 fps for smooth animation
         
     def animate(self):
-        self.offset_x += 0.5
-        self.offset_y += 0.5
-        # Wrap at pattern period to avoid floating point issues
-        # Pattern repeats when offset changes by step (perpendicular spacing)
-        period = 16 * 16  # full cycle before floating point drift
-        if self.offset_x >= period:
-            self.offset_x -= period
-        if self.offset_y >= period:
-            self.offset_y -= period
+        self.phase += 0.5
+        # Wrap at pattern period (16*sqrt(2)) so grid alignment is consistent
+        self.phase %= (16 * (2 ** 0.5))
         self.update()
         
     def resizeEvent(self, event):
@@ -241,8 +237,8 @@ class BackgroundWidget(QWidget):
         h = self.height()
         
         # Calculate the effective c offset for each line family
-        c45_offset = self.offset_x - self.offset_y
-        c135_offset = self.offset_x + self.offset_y
+        c45_offset = self.phase
+        c135_offset = self.phase
         
         # Range of c values to cover the widget with generous margin
         # Need extra margin to ensure lines at edges are drawn
@@ -346,10 +342,11 @@ class SpriteViewer(QMainWindow):
 
         if self.sprites:
             self.load_sprite(0)
+            self.fps_spin.setValue(self.sprites[0]['duration'] if self.sprites[0]['duration'] > 0 else 100)
             # Start auto-play
             self.playing = True
             self.play_btn.setText('Pause')
-            self.timer.start(int(1000 / self.fps))
+            self._start_timer()
         else:
             self.statusBar().showMessage('No sprite headers found. Add GIF/*.h files.')
         
@@ -405,10 +402,10 @@ class SpriteViewer(QMainWindow):
         play_layout.addWidget(self.next_btn)
 
         self.fps_spin = QSpinBox()
-        self.fps_spin.setRange(1, 60)
-        self.fps_spin.setValue(10)
+        self.fps_spin.setRange(10, 2000)
+        self.fps_spin.setValue(100)
         self.fps_spin.valueChanged.connect(self.fps_changed)
-        self.fps_spin.setSuffix(' fps')
+        self.fps_spin.setSuffix(' ms')
         play_layout.addWidget(self.fps_spin)
 
         play_group.setLayout(play_layout)
@@ -448,17 +445,37 @@ class SpriteViewer(QMainWindow):
        # Main display area with animated cross-hatch background
         self._display_container = QWidget()
         self._display_container.setAutoFillBackground(False)
-        display_layout = QHBoxLayout(self._display_container)
+        display_layout = QVBoxLayout(self._display_container)
         display_layout.setContentsMargins(0, 0, 0, 0)
-        display_layout.setSpacing(8 * self.magnification)  # Gap = half GIF width at current zoom
+        display_layout.setSpacing(0)
+        
+        # Panels container
+        self._panels_row = QWidget()
+        panels_layout = QHBoxLayout(self._panels_row)
+        panels_layout.setContentsMargins(0, 0, 0, 0)
+        panels_layout.setSpacing(8 * self.magnification)
         
         # Create background widget for display area only
-        self.background = BackgroundWidget(self._display_container)
+        self.background = BackgroundWidget(self._panels_row)
         self.background.lower()
         # Install event filter to size background when container is shown/resized
-        self._display_container.installEventFilter(self)
+        self._panels_row.installEventFilter(self)
         
-        # Left: Reconstructed animation
+          # Left column: label + scroll area
+        left_column = QWidget()
+        left_column_layout = QVBoxLayout(left_column)
+        left_column_layout.setContentsMargins(0, 0, 0, 0)
+        left_column_layout.setSpacing(0)
+        
+        left_column_layout.addStretch(1)
+        
+        self.left_label = QLabel('Decoded Header')
+        self.left_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.left_label.setStyleSheet('color: #a0e0ff; font-size: 13px; font-weight: bold;')
+        self.left_label.setAutoFillBackground(False)
+        self.left_label.setMinimumHeight(18)
+        left_column_layout.addWidget(self.left_label)
+        
         left_area = QScrollArea()
         left_area.setWidgetResizable(True)
         left_area.setStyleSheet('background: transparent; border: none;')
@@ -467,9 +484,30 @@ class SpriteViewer(QMainWindow):
         self.reconstructed_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.reconstructed_label.setStyleSheet('color: gray; font-size: 14px;')
         left_area.setWidget(self.reconstructed_label)
-        display_layout.addWidget(left_area, 1)
-
-        # Right: Source GIF
+        left_column_layout.addWidget(left_area, 3)
+        
+        panels_layout.addWidget(left_column, 1)
+        
+        # Spacer between panels
+        self._panel_spacer = QWidget()
+        self._panel_spacer.setFixedWidth(8 * self.magnification)
+        panels_layout.addWidget(self._panel_spacer)
+        
+        # Right column: label + scroll area
+        right_column = QWidget()
+        right_column_layout = QVBoxLayout(right_column)
+        right_column_layout.setContentsMargins(0, 0, 0, 0)
+        right_column_layout.setSpacing(0)
+        
+        right_column_layout.addStretch(1)
+        
+        self.right_label = QLabel('Original GIF')
+        self.right_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.right_label.setStyleSheet('color: #a0e0ff; font-size: 13px; font-weight: bold;')
+        self.right_label.setAutoFillBackground(False)
+        self.right_label.setMinimumHeight(18)
+        right_column_layout.addWidget(self.right_label)
+        
         right_area = QScrollArea()
         right_area.setWidgetResizable(True)
         right_area.setStyleSheet('background: transparent; border: none;')
@@ -478,9 +516,13 @@ class SpriteViewer(QMainWindow):
         self.source_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.source_label.setStyleSheet('color: gray; font-size: 14px;')
         right_area.setWidget(self.source_label)
-        display_layout.addWidget(right_area, 1)
+        right_column_layout.addWidget(right_area, 3)
         
-        main_layout.addWidget(self._display_container)
+        panels_layout.addWidget(right_column, 1)
+        
+        display_layout.addWidget(self._panels_row)
+        
+        main_layout.addWidget(self._display_container, 1)
 
         # Status bar
         self.status_bar = self.statusBar()
@@ -512,6 +554,9 @@ class SpriteViewer(QMainWindow):
             key = Qt.Key.Key_1 + (i - 1)
             shortcut = QShortcut(QKeySequence(key), self)
             shortcut.activated.connect(lambda idx=i-1: self.sprite_combo.setCurrentIndex(idx))
+        
+        self.quit_shortcut = QShortcut(QKeySequence('Ctrl+Q'), self)
+        self.quit_shortcut.activated.connect(lambda: self.close())
 
     def load_sprite(self, idx):
         """Load a sprite and its source GIF."""
@@ -605,18 +650,23 @@ class SpriteViewer(QMainWindow):
         if self.playing:
             self.toggle_play()
         self.load_sprite(idx)
+        sprite = self.sprites[idx]
+        self.fps_spin.setValue(sprite['duration'] if sprite['duration'] > 0 else 100)
         # Restart playback
         self.playing = True
         self.play_btn.setText('Pause')
-        self.timer.start(int(1000 / self.fps))
+        self._start_timer()
+
+    def _start_timer(self):
+        """Start the playback timer using the spin box delay."""
+        self.timer.start(self.fps_spin.value())
 
     def toggle_play(self):
         """Toggle playback."""
         self.playing = not self.playing
         if self.playing:
             self.play_btn.setText('Pause')
-            self.fps = self.fps_spin.value()
-            self.timer.start(int(1000 / self.fps))
+            self._start_timer()
         else:
             self.play_btn.setText('Play')
             self.timer.stop()
@@ -675,17 +725,18 @@ class SpriteViewer(QMainWindow):
         if os.path.exists(gif_path):
             self._show_gif(gif_path)
 
-    def fps_changed(self, fps):
-        """Handle FPS change."""
+    def fps_changed(self, ms):
+        """Handle frame delay change."""
         if self.playing:
-            self.timer.start(int(1000 / fps))
+            self.timer.start(ms)
 
     def mag_changed(self, mag):
         """Handle magnification change."""
         self.magnification = mag
         self.mag_label.setText(f'{mag}x')
-        # Update gap to maintain half-GIF-width spacing
-        self._display_container.layout().setSpacing(8 * self.magnification)
+        # Update gap between panels
+        self._panels_row.layout().setSpacing(0)
+        self._panel_spacer.setFixedWidth(8 * self.magnification)
         # Refresh current display
         if self.sprites:
             self.show_current_frame()
@@ -725,14 +776,21 @@ class SpriteViewer(QMainWindow):
             self.mag_slider.setValue(max(2, self.magnification - 1))
 
     def eventFilter(self, obj, event):
-        """Event filter to size background when display_container is shown."""
-        if obj is getattr(self, '_display_container', None):
+        """Event filter to size background when display is shown."""
+        if obj is getattr(self, '_panels_row', None):
             if event.type() == QEvent.Type.Show:
                 parent = cast(QWidgetType, self.background.parent())
                 if parent:
                     self.background.setGeometry(parent.rect())
                     self.background.update()
         return super().eventFilter(obj, event)
+
+    def showEvent(self, event):
+        """Force layout recalculation on first show."""
+        super().showEvent(event)
+        if hasattr(self, '_panels_row'):
+            self._panels_row.updateGeometry()
+            self._panels_row.layout().activate()
 
     def resizeEvent(self, event):
         """Handle window resize to keep background in sync."""
@@ -744,22 +802,64 @@ class SpriteViewer(QMainWindow):
                 self.background.update()
 
 
+def resolve_header_paths(paths):
+    """Resolve CLI arguments to a list of .h header file paths.
+    
+    Each argument can be a file or a directory. If a .gif is given,
+    finds the sibling .h. If a .h is given, uses it directly.
+    Directories are globbed for all *.h files.
+    """
+    result = []
+    for p in paths:
+        p = os.path.abspath(p)
+        if os.path.isdir(p):
+            result.extend(sorted(glob.glob(os.path.join(p, '*.h'))))
+        elif os.path.isfile(p):
+            base, ext = os.path.splitext(p)
+            if ext.lower() == '.gif':
+                h_path = base + '.h'
+                if os.path.isfile(h_path):
+                    result.append(h_path)
+                else:
+                    print(f'Warning: no header found for {os.path.basename(p)}, skipping')
+            elif ext.lower() == '.h':
+                result.append(p)
+            else:
+                print(f'Warning: unsupported file type {ext}, skipping: {p}')
+        else:
+            print(f'Warning: path not found, skipping: {p}')
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description='View heatshrink-compressed sprite animations')
     parser.add_argument(
-        'headers', nargs='*',
-        help='C header files to load (default: all GIF/*.h)'
+        'paths', nargs='*',
+        help='C header files, GIF files, or directories to load (default: all GIF/*.h)'
     )
     args = parser.parse_args()
 
     app = QApplication(sys.argv)
     app.setStyle('Fusion')
 
-    window = SpriteViewer(args.headers)
+    # Handle Ctrl+C by quitting the app cleanly
+    def sigint_handler(sig, frame):
+        app.quit()
+    signal.signal(signal.SIGINT, sigint_handler)
+
+    if args.paths:
+        header_files = resolve_header_paths(args.paths)
+    else:
+        header_files = sorted(glob.glob('GIF/*.h'))
+
+    window = SpriteViewer(header_files)
     window.show()
 
     sys.exit(app.exec())
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except (KeyboardInterrupt, SystemExit):
+        pass
