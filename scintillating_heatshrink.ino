@@ -5,8 +5,8 @@
 
 // MAX_MILLIWATTS can only be changed at compile-time. Use 0 to disable limit.
 // Brightness can be changed at runtime via serial with 'b' and 'B'
-#define MAX_MILLIWATTS 3500
-#define BRIGHTNESS     16
+#define MAX_MILLIWATTS 0
+#define BRIGHTNESS     255
 #define LED_PIN        2
 #define COLOR_ORDER    GRB
 #define CHIPSET        WS2812B
@@ -36,11 +36,9 @@ typedef struct {
   uint32_t millis = 0;
   uint8_t effect = 2;
   uint8_t palette_n = 1;
-  uint8_t alpha_fade = 64;
+  uint8_t alpha_fade = 16;
   uint8_t brightness = BRIGHTNESS;
   uint8_t rs_preset_n = 0;
-  TBlendType currentBlending = LINEARBLEND;
-  uint8_t extendedmixing = 1;
   RainbowSmoothiePreset rs;
 } Config;
 Config cfg;
@@ -48,10 +46,6 @@ Config cfg;
 // /*__attribute__ ((section(".noinit")))*/ uint8_t * nv_preset;
 void setup() {
   FastLED.addLeds<CHIPSET, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS);
-  FastLED.setCorrection(UncorrectedColor);
-  FastLED.setTemperature(UncorrectedTemperature);
-  FastLED.setDither(DISABLE_DITHER);
-  // FastLED.setMaxRefreshRate(400);
   if (MAX_MILLIWATTS > 0) FastLED.setMaxPowerInMilliWatts(MAX_MILLIWATTS);
 
   if (SERIAL_UI == 1) {
@@ -59,7 +53,6 @@ void setup() {
     halp();
   }
 
-  pinMode(LED_BUILTIN, OUTPUT);
   inc_palette(0);
   inc_rs_preset(0);
 }
@@ -73,14 +66,12 @@ void loop() {
     if (cfg.frame <= FADEIN_FRAMES)
       FastLED.setBrightness(scale8(cfg.brightness, (cfg.frame * 255) / FADEIN_FRAMES));
 
-    // cap the frame rate and indicate idle time via the built-in LED
+    // cap the frame rate
     cfg.frame++;
     uint32_t frame_time = millis() - cfg.millis;  // wraparound safe
     int32_t pause = MS_GOAL - frame_time;
     // if (pause < 0 && SERIAL_UI == 1) { Serial.print(-pause); Serial.println("ms late"); }
-    digitalWrite(LED_BUILTIN, HIGH);
     if (pause > 0) delay(pause);
-    digitalWrite(LED_BUILTIN, LOW);
     cfg.millis = millis();
     FastLED.show();
 }
@@ -102,18 +93,6 @@ void poll_serial() {
     case 'F':
       cfg.alpha_fade = qadd8(cfg.alpha_fade, 1);
       break;
-    case '{':
-      cfg.currentBlending = LINEARBLEND;
-      break;
-    case '}':
-      cfg.currentBlending = NOBLEND;
-      break;
-    case '[':
-      cfg.extendedmixing = 1;
-      break;
-    case ']':
-      cfg.extendedmixing = 0;
-      break;
     case 'p':
       inc_palette(1);
       break;
@@ -127,12 +106,6 @@ void poll_serial() {
     case 'b':
       cfg.brightness = qsub8(cfg.brightness, 1);
       FastLED.setBrightness(cfg.brightness);
-      break;
-    case 'd':
-      FastLED.setDither(DISABLE_DITHER);
-      break;
-    case 'D':
-      FastLED.setDither(BINARY_DITHER);
       break;
     case ',':
       cfg.rs.bcd -= 64;
@@ -164,11 +137,8 @@ void halp() {
                   " <enter>\tprint parameters\r\n"
                   " e\tswitch to next Effect\r\n"
                   " p\tswitch to next palette\r\n"
-                  " {}\tturn extended palette blending on/off\r\n"
-                  " []\tturn linear palette blending on/off\r\n"
                   " ,.<>\tchange colour cycling rate\r\n"
                   " bB\tbrightness down/up\r\n"
-                  " dD\tbinary dither off/on\r\n"
                   " fF\tdecrease/increase fade out rate\r\n"));
   Serial.println(sizeof(HStatus));
   Serial.println(HSPRITES_N);
@@ -236,16 +206,16 @@ FL_PROGMEM extern const TProgmemRGBPalette16 *const palettes16[] = {
   // &myRedWhiteBluePalette_p, &myBlackWhitePalette_p
 };
 #define RGB16PALETTES (sizeof(palettes16) / sizeof(palettes16[0]))
-FL_PROGMEM extern const TProgmemRGBGradientPalettePtr palettesGrad[] = {
+FL_PROGMEM extern const TProgmemRGBGradientPaletteRef palettesGrad[] = {
   // froth616_gp,
 };
-#define RGBGRADPALETTES (sizeof(palettesGrad) / sizeof(TProgmemRGBGradientPalettePtr))
+#define RGBGRADPALETTES (sizeof(palettesGrad) / sizeof(TProgmemRGBGradientPaletteRef))
 
 void inc_palette(uint8_t n) {
   uint8_t total_palettes = RGB16PALETTES + RGBGRADPALETTES;
   cfg.palette_n = n = addmod8(cfg.palette_n, n, total_palettes);
   if (n < RGBGRADPALETTES) {
-    currentPalette = (TProgmemRGBGradientPalettePtr) FL_PGM_READ_PTR_NEAR(&palettesGrad[n]);
+    currentPalette = (TProgmemRGBGradientPaletteRef) FL_PGM_READ_PTR_NEAR(&palettesGrad[n]);
     return;
   }
   n -= RGBGRADPALETTES;
@@ -297,11 +267,7 @@ void rainbow_smoothie() {
     for (byte x = 0; x < kMatrixWidth; x++) {
       pixelHue += xhd;
       xhd += xd2;
-      if (cfg.extendedmixing == 1) {
-        leds[XY(x, y)] = ColorFromPaletteExtended(currentPalette, pixelHue >> 7, 255, cfg.currentBlending);
-      } else {
-        leds[XY(x, y)] = ColorFromPalette(currentPalette, pixelHue >> 15, 255, cfg.currentBlending);
-      }
+      leds[XY(x, y)] = ColorFromPaletteExtended(currentPalette, pixelHue >> 7, 255, LINEARBLEND);
     }
   }
 }
@@ -416,14 +382,14 @@ void heatshrunk_sprite_plot(int8_t xstart, int8_t ystart, HStatus* status, const
   for (uint8_t y = 0; y < kMatrixHeight; y++) {
     for (uint8_t x = 0; x < kMatrixWidth; x++) {
       uint16_t led_index = XY(addmod8(x, xstart, kMatrixWidth),
-                              (kMatrixHeight - 1) - addmod8(y, ystart, kMatrixHeight));
+                              addmod8(y, ystart, kMatrixHeight));
       uint8_t palette_index = *pixels++;
       if (palette_index > 0 && cfg.effect != 1) {
         // non-0 palette entry;  copy the palette entry to the LED
         leds[led_index] = pal[palette_index];
       } else {
         // palette entry 0 is the mask;  fade this LED to the mask colour (black usually)
-        fadeTowardColour(leds[led_index], pal[palette_index], fade_speed);
+        leds[led_index] = blend(leds[led_index], pal[palette_index], fade_speed);
       }
     }
   }

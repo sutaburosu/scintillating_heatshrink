@@ -24,6 +24,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <stdlib.h>
 #include <string.h>
 #include "heatshrink_decoder.h"
+#include "FastLED-additions.h"
 
 /* States for the polling state machine. */
 typedef enum {

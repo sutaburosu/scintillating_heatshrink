@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "author": "sutaburosu",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "id": "nano",
+      "type": "wokwi-arduino-nano",
+      "top": 390,
+      "left": 100
+    },
+    {
+      "id": "neopixels",
+      "type": "wokwi-neopixel-canvas",
+      "top": 0,
+      "left": 0,
+      "attrs": {
+        "rows": "16",
+        "cols": "16",
+        "pixelate": "circle",
+        "matrixLayout": "serpentine"
+      }
+    }
+  ],
+  "connections": [
+    ["nano:GND.2", "neopixels:VSS", "black", ["v0", "*", "v16"]],
+    ["nano:2", "neopixels:DIN", "green", ["v-16", "*", "v8"]],
+    ["nano:5V", "neopixels:VDD", "red", ["v20", "h-130", "*", "v8"]]
+  ],
+  "serialMonitor": {
+    "display": "terminal",
+    "lineEnding": 1
+  }
+}
